@@ -1,0 +1,190 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html xmlns:ng="http://angularjs.org" id="ng-app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns:ng="http://angularjs.org" id="ng-app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns:ng="http://angularjs.org" id="ng-app" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <!--[if lte IE 8]>
+            <script>
+                document.createElement('ng-include');
+                document.createElement('ng-pluralize');
+                document.createElement('ng-view');
+                document.createElement('ng:include');
+                document.createElement('ng:pluralize');
+                document.createElement('ng:view');
+            </script>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>VIP Communications</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- @include views/favicon.html -->
+
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/font.css">
+        <link rel="stylesheet" href="styles/bootstrap.css">
+        <link rel="stylesheet" href="styles/bootstrap-responsive.css">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="styles/fixes.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/BootstrapFormHelpers/css/bootstrap-formhelpers.css">
+        <link rel="stylesheet" href="bower_components/BootstrapFormHelpers/css/bootstrap-formhelpers-countries.flags.css">
+        <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
+        <link rel="stylesheet" href="styles/ccs.css">
+        <!-- endbuild -->
+    </head>
+    <body ng-app="signupApp" ng-controller="MainCtrl">
+        <!--[if lt IE 9]>
+        <script src="bower_components/es5-shim/es5-shim.js"></script>
+        <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
+
+        <section class="header-wrap row-fluid" ng-include="'views/header.html'"></section>
+
+        <section class="content-panel pull-left row-fluid">
+            <div class="content-region no-left-col">
+                <div class="panel-holder">
+                    <div class="left-panel pull-left" style="width: 100%">
+                        <div class="row-fluid">
+                            <div class="panel-stuff nobg">
+                                <div class="panel-content pull-right" style="border-right: none">
+                                    <div class="panel-material">
+                                        <div class="container">
+                                            <div ng-include src="'views/alerts.html'"></div>
+                                            <div ui-view></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="testimonials pull-left row-fluid" ng-include src="'views/trustpilot.html'" onload="bxslider()"></div>
+
+        <section class="footer-wrap row-fluid" ng-include="'views/footer.html'"></section>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+            a=s.createElement(o),m=s.getElementsByTagName(o)[0];
+            a.async=1;
+            a.src=g;
+            m.parentNode.insertBefore(a,m) })
+            (window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-XXXXX-X', 'auto');
+            ga('require', 'linkid', 'linkid.js');
+            ga('require', 'ecommerce', 'ecommerce.js');
+//            ga('require', 'displayfeatures');
+        </script>
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-dropdown.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-tooltip.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-modal.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-transition.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-button.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-popover.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-typeahead.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-carousel.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-scrollspy.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-collapse.js"></script>
+        <script src="bower_components/bootstrap-sass/js/bootstrap-tab.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-uuid4/angular-uuid4.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="scripts/modules/angular-payments.js"></script>
+        <script src="bower_components/ng-idle/angular-idle.js"></script>
+        <script src="bower_components/BootstrapFormHelpers/js/bootstrap-formhelpers-selectbox.js"></script>
+        <script src="scripts/misc/bootstrap-formhelpers-countries.en_US.js"></script>
+        <script src="scripts/misc/bootstrap-formhelpers-countries.js"></script>
+        <script src="scripts/misc/bootstrap-formhelpers-states.en_US.js"></script>
+        <script src="bower_components/BootstrapFormHelpers/js/bootstrap-formhelpers-states.js"></script>
+        <script src="scripts/misc/bootstrap-formhelpers-phone.en_US.js"></script>
+        <script src="scripts/misc/bootstrap-formhelpers-phone.js"></script>
+        <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+        <script src="bower_components/bxslider-4-kallisto/jquery.bxslider.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/config.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/services/alertService.js"></script>
+        <script src="scripts/directives/countryPicker.js"></script>
+        <script src="scripts/directives/pwCheck.js"></script>
+        <script src="scripts/directives/uniquePhone.js"></script>
+        <script src="scripts/directives/uniqueEmail.js"></script>
+        <script src="scripts/directives/validateReferral.js"></script>
+        <script src="scripts/directives/validatePromotion.js"></script>
+        <script src="scripts/directives/validatePhone.js"></script>
+        <script src="scripts/directives/validateActivation.js"></script>
+        <script src="scripts/controllers/TermsModal.js"></script>
+        <script src="scripts/controllers/PrivacyModal.js"></script>
+        <script src="scripts/controllers/ModalInstance.js"></script>
+        <script src="scripts/directives/backButton.js"></script>
+        <script src="scripts/controllers/SendAppLink.js"></script>
+        <script src="scripts/controllers/Contacts.js"></script>
+        <script src="scripts/controllers/Validate.js"></script>
+        <script src="scripts/directives/ValidatePIN.js"></script>
+        <script src="scripts/filters/vipFilters.js"></script>
+        <script src="scripts/filters/capitalize.js"></script>
+        <script src="scripts/directives/statePicker.js"></script>
+        <script src="scripts/filters/maskCreditCard.js"></script>
+        <script src="scripts/filters/tel.js"></script>
+        <script src="scripts/directives/cardExpiration.js"></script>
+        <script src="scripts/directives/phoneFormat.js"></script>
+        <script src="scripts/filters/range.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/olark.js -->
+        <script src="scripts/olark.js"></script>
+        <script src="scripts/directives/dlgRate.js"></script>
+        <script src="scripts/controllers/initialCreation.js"></script>
+        <script src="scripts/services/account.js"></script>
+        <script src="scripts/services/Signup.js"></script>
+        <script src="scripts/services/contact.js"></script>
+        <script src="scripts/services/Payment.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <script src="scripts/directives/focus.js"></script>
+        <script src="scripts/filters/numberFixedLen.js"></script>
+        <script src="scripts/services/validate.js"></script>
+        <script src="scripts/directives/editableCurrency.js"></script>
+        <script src="scripts/directives/accessibleForm.js"></script>
+        <script src="scripts/directives/spinner.js"></script>
+        <script src="scripts/directives/integer.js"></script>
+        <!-- endbuild -->
+
+        <script type="text/javascript"> 
+            var $buoop = {}; 
+            $buoop.ol = window.onload; 
+            window.onload=function(){ 
+                try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+                var e = document.createElement("script"); 
+                e.setAttribute("type", "text/javascript"); 
+                e.setAttribute("src", "//browser-update.org/update.js"); 
+                document.body.appendChild(e); 
+            } 
+        </script> 
+
+    </body>
+</html>

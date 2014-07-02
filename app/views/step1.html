@@ -1,0 +1,18 @@
+<div ng-switch on="signup.offer">
+    <div ng-switch-when="minutes">  
+        <div ng-switch on="signup.callingMethod">
+            <div ng-switch-when="iPhone">
+                <div ng-include="'views/iphone.html'"></div>
+            </div>
+            <div ng-switch-when="android">
+                <div ng-include="'views/android.html'"></div>   
+            </div>
+            <div ng-switch-default>
+                <div ng-include="'views/personal.html'"></div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-default>
+        <div ng-include="'views/personal.html'"></div>
+    </div>
+</div>

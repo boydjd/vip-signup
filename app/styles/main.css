@@ -1,0 +1,430 @@
+input! > i {
+    display: none;
+}
+
+.hero-unit {
+    margin: 50px auto 0 auto;
+    width: 300px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 60px;
+}
+
+.hero-unit h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.nav, .pagination, .carousel a {
+    cursor: pointer;
+}
+
+form[editable-form] > div {
+    height: auto;
+    padding: 5px 0;
+}
+
+form[editable-form] .title {
+    display: inline-block;
+    padding-top: 5px;
+    vertical-align: top;
+    min-width: 190px;
+}
+
+form[editable-form] .editable {
+    display: inline-block;
+    padding-top: 5px;
+    vertical-align: top;
+}
+
+form[editable-form] button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    color: #0088cc;
+}
+
+form[editable-form] > div.buttons > strong {
+    min-width: 145px;
+    display: inline-block;
+}
+
+form[editable-form] > div.buttons > span > button[type=button] {
+    margin-left: 1em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+/*input[type="radio"] {
+display: none;
+}
+
+
+fieldset label.radio.inline {
+font-size: 3em;
+}
+
+label.radio.inline i:hover {
+color: red;
+}
+
+input[type="radio"]:checked + i {
+font-size: 2em;
+color: green;
+}
+ */
+
+/* Begin CSS for checkStrength directive */
+
+input.ng-pristine + ul#strength {
+    display: none;
+}
+
+ul#strength {
+    display: inline;
+    list-style: none;
+    margin: 0;
+    margin-left: 15px;
+    padding: 0;
+    vertical-align: 2px;
+}
+
+.point:last {
+    margin: 0 !important;
+}
+
+.point {
+    background: #DDD;
+    border-radius: 2px;
+    display: inline-block;
+    height: 5px;
+    margin-right: 1px;
+    width: 20px;
+}
+
+/* End CSS for checkStrength directive */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.dropdown-menu > li > a {
+    text-transform: uppercase;
+    color: #0088cc;
+}
+
+.dropdown-menu > li > a:hover {
+    color: white !important;
+}
+
+.dropdown, .main-nav > li {
+    padding: 0 0 0 15px;
+}
+
+.dropdown-menu > li {
+    padding-left: 0;
+}
+
+.main-nav > li > a {
+    outline: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 0;
+}
+
+.main-nav > li > a > i.fa {
+    display: inline;
+}
+
+.dropdown > .dropdown-menu {
+    margin-left: 15px;
+}
+
+.top-nav-anchor:hover {
+    outline: none;
+    color: #838181 !important;
+}
+
+.top-nav-anchor > a {
+    text-decoration: none;
+}
+
+div.container.ng-scope, .content-region.no-left-col .panel-content {
+    min-height: 500px;
+}
+
+.header-wrap {
+    position: static;
+}
+
+.content-panel {
+    margin-top: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none; 
+}
+
+.well {
+    background-color: white;
+    box-shadow: none;
+    border: none;
+}
+
+.form-actions {
+    background-color: white;
+    border-top: none;
+}
+
+.bfh-selectbox {
+    vertical-align: top;
+}
+
+@media (max-width: 767px) {
+    .icon-testimonial {
+        display: none;
+    }
+    [class*="span"]:not(:first-child) {
+        margin-top: 2%;
+    }
+}
+
+/* begin device icons */
+
+i.icon-hotel {
+    background-image: url('../img/hotel-payphone-black.png');
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+i.icon-hotel:hover {
+    background-image: url('../img/hotel-payphone-blue.png');
+}
+
+input[type="radio"]:checked + i.icon-hotel {
+    background-image: url('../img/hotel-payphone-blue.png');
+}
+
+i.icon-landline {
+    background-image: url('../img/landline-black.png');
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+i.icon-landline:hover {
+    background-image: url('../img/landline-blue.png');
+}
+
+input[type="radio"]:checked + i.icon-landline {
+    background-image: url('../img/landline-blue.png');
+}
+
+i.icon-cellphone {
+    background-image: url('../img/other-cellphone-black.png');
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+i.icon-cellphone:hover {
+    background-image: url('../img/other-cellphone-blue.png');
+}
+
+input[type="radio"]:checked + i.icon-cellphone {
+    background-image: url('../img/other-cellphone-blue.png');
+}
+
+i.icon-blackberry {
+    background-image: url('../img/blackberry-black.png');
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+i.icon-blackberry:hover {
+    background-image: url('../img/blackberry-blue.png');
+}
+
+input[type="radio"]:checked + i.icon-blackberry {
+    background-image: url('../img/blackberry-blue.png');
+}
+
+i.icon-android {
+    background-image: url('../img/android-black.png');
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+i.icon-android:hover {
+    background-image: url('../img/android-blue.png');
+}
+
+input[type="radio"]:checked + i.icon-android {
+    background-image: url('../img/android-blue.png');
+}
+
+i.icon-iphone {
+    background-image: url('../img/iphone-black.png');
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+i.icon-iphone:hover {
+    background-image: url('../img/iphone-blue.png');
+}
+
+input[type="radio"]:checked + i.icon-iphone {
+    background-image: url('../img/iphone-blue.png');
+}
+
+h1, h2 {
+    color: #2895c0;
+}
+
+.btn-primary.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+.btn-primary {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #6a9225;
+    background-image: -moz-linear-gradient(top, #76a229, #58791f);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#76a229), to(#58791f));
+    background-image: -webkit-linear-gradient(top, #76a229, #58791f);
+    background-image: -o-linear-gradient(top, #76a229, #58791f);
+    background-image: linear-gradient(to bottom, #76a229, #58791f);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff76a229', endColorstr='#ff58791f', GradientType=0);
+    border-color: #58791f #58791f #2c3c0f;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #58791f;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+    color: #ffffff;
+    background-color: #58791f;
+    *background-color: #4a651a;
+}
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #3b5114 ;
+}
+
+.btn-front.active {
+color: rgba(255, 255, 255, 0.75);
+}
+.btn-front {
+color: #ffffff;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: #fc891a;
+background-image: -moz-linear-gradient(top, #ff932b, #f77900);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff932b), to(#f77900));
+background-image: -webkit-linear-gradient(top, #ff932b, #f77900);
+background-image: -o-linear-gradient(top, #ff932b, #f77900);
+background-image: linear-gradient(to bottom, #ff932b, #f77900);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff932b', endColorstr='#fff77900', GradientType=0);
+border-color: #f77900 #f77900 #ab5400;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+*background-color: #f77900;
+/* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-front:hover,
+.btn-front:focus,
+.btn-front:active,
+.btn-front.active,
+.btn-front.disabled,
+.btn-front[disabled] {
+color: #ffffff;
+background-color: #f77900;
+*background-color: #de6d00;
+}
+.btn-front:active,
+.btn-front.active {
+background-color: #c46000 ;
+}
+
+.container {
+    width: 100% !important;
+}
+
+.dim {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+input[type="radio"].hide {
+    display: none;
+}
+
+.progress .bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #149bdf;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2FACDE), to(#2895c0));
+    background-image: -webkit-linear-gradient(top, #2FACDE, #2895c0);
+    background-image: linear-gradient(to bottom, #2FACDE, #2895c0);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149bdf', endColorstr='#ff0480be', GradientType=0);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+}
+
+.progress-success .bar,
+.progress .bar-success {
+    background-color: #62c462;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9AC944), to(#89b43c));
+    background-image: -webkit-linear-gradient(top, #9AC944, #89b43c);
+    background-image: linear-gradient(to bottom, #9AC944, #89b43c);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff57a957', GradientType=0);
+}
+
+ul {
+    list-style: none;
+}

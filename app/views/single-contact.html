@@ -1,0 +1,100 @@
+<div ng-include="'views/progress.html'"></div>
+
+<form name="contactForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend><h1 class="panel-material-header">Who do you want to call?</h1></legend>
+        <span class="help-block">
+            Tell us who you want to call. We'll give you a local number that you can dial to reach them.
+        </span>
+        <div class="control-group" ng-class="getCssClasses(contactForm.inputContactName)">
+            <label class="control-label" for="inputContactName">Who do you want to call?</label>
+            <div class="controls">
+                <input type="text"
+                    name="inputContactName"
+                    id="inputContactName"
+                    ng-model="signup.contact.firstName"
+                    placeholder="Enter contact's name"
+                    required>
+                <span ng-messages="contactForm.inputContactName.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="contactForm.inputContactName.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(contactForm.inputContactNumber)">
+            <label class="control-label" for="inputContactNumber">What is their phone number?</label>
+            <div class="controls">
+                <select id="inputContactCountry"
+                    name="inputContactCountry"
+                    class="bfh-countries"
+                    data-blank="false"
+                    ng-model="signup.contact.country"
+                    required
+                    country-picker
+                    placeholder="Select country">
+                </select>
+                <input type="tel"
+                    id="inputContactNumber"
+                    name="inputContactNumber"
+                    class="bfh-phone"
+                    ng-model="signup.contact.phoneNumber"
+                    ng-model-options="{ debounce: 500 }"
+                    required
+                    placeholder="Phone number"
+                    phone-format
+                    data-country="inputContactCountry"
+                    data-number="{{signup.contact.phoneNumber}}"
+                    ng-minlength="10"
+                    validate-phone country="{{signup.contact.country}}"
+                    ng-disabled="!signup.contact.country">
+                <span ng-messages="contactForm.inputContactNumber.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="contactForm.inputContactNumber.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(contactForm.inputContactDevice)">
+            <label class="control-label" for="inputContactDevice">Type of phone?</label>
+            <div class="controls">
+                <select class="input-small"
+                    id="inputContactDevice"
+                    name="inputContactDevice"
+                    ng-model="signup.contact.device"
+                    required>
+                    <option>Mobile</option>
+                    <option>Home</option>
+                    <option>Work</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-actions" ng-switch on="signup.offer">
+            <span ng-switch-when="minutes">
+                <button type="button"
+                    class="btn btn-large"
+                    ui-sref="gca.validate">
+                    Skip
+                </button>
+                <button type="submit"
+                    class="btn btn-primary btn-large"
+                    ng-disabled="contactForm.$invalid"
+                    ui-sref="gca.validate">
+                    Get your free call
+                </button>
+            </span>
+            <span ng-switch-default>
+                <button type="button"
+                    class="btn btn-large"
+                    ui-sref="gca.payment">
+                    Skip
+                </button>
+                <button type="submit"
+                    class="btn btn-primary btn-large"
+                    ng-disabled="contactForm.$invalid"
+                    ui-sref="gca.payment">
+                    Get $5 free
+                </button>
+            </span>
+        </div>
+    </fieldset>
+</form>

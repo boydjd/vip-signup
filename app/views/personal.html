@@ -1,0 +1,113 @@
+<div ng-include="'views/progress.html'"></div>
+
+<form name="personalForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend ng-if="signup.offer === 'minutes'"><h1 class="panel-material-title">Try VIP for FREE</h1></legend>
+        <legend ng-if="signup.offer === 'dollars'"><h1 class="panel-material-title">Join now and get $5 FREE calling</h1></legend>
+        <div class="control-group" ng-class="getCssClasses(personalForm.inputFirstName)">
+            <label class="control-label" for="inputFirstName">First Name</label>
+            <div class="controls">
+                <input type="text"
+                    name="inputFirstName"
+                    id="inputFirstName"
+                    ng-model="signup.user.firstName"
+                    required
+                    placeholder="First name">
+                <span ng-messages="personalForm.inputFirstName.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="personalForm.inputFirstName.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(personalForm.inputLastName)">
+            <label class="control-label" for="inputLastName">Last Name</label>
+            <div class="controls">
+                <input type="text"
+                    id="inputLastName"
+                    name="inputLastName"
+                    ng-model="signup.user.lastName"
+                    required
+                    placeholder="Last name">
+                <span ng-messages="personalForm.inputLastName.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="personalForm.inputLastName.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(personalForm.inputPhoneNumber)">
+            <label class="control-label" for="inputPhoneNumber">Phone Number</label>
+            <div class="controls">
+                <select id="inputBillingCountry"
+                    name="inputBillingCountry"
+                    class="bfh-countries"
+                    data-blank="false"
+                    ng-model="signup.payment.country"
+                    required
+                    country-picker>
+                </select>
+                <input type="tel"
+                    id="inputPhoneNumber"
+                    name="inputPhoneNumber"
+                    class="bfh-phone"
+                    ng-model="signup.user.phoneNumber"
+                    ng-model-options="{ debounce: 500 }"
+                    unique-phone
+                    required
+                    placeholder="Phone number"
+                    phone-format
+                    data-country="inputBillingCountry"
+                    data-number="{{signup.user.phoneNumber}}"
+                    validate-phone
+                    country="{{signup.payment.country}}"
+                    ng-minlength="10">
+                <span ng-messages="personalForm.inputPhoneNumber.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="personalForm.inputPhoneNumber.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(personalForm.inputRoomNumber)" ng-if="signup.callingMethod === 'hotel'">
+            <label class="control-label" for="inputRoomNumber">Room Number</label>
+            <div class="controls">
+                <input type="number"
+                    id="inputRoomNumber"
+                    name="inputRoomNumber"
+                    ng-model="signup.payment.roomNumber"
+                    ng-model-options="{ debounce: 500 }"
+                    placeholder="Room number">
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(personalForm.inputEmail)">
+            <label class="control-label" for="inputEmail">Email Address</label>
+            <div class="controls">
+                <input type="email"
+                    id="inputEmail"
+                    name="inputEmail"
+                    ng-model="signup.user.email"
+                    ng-model-options="{ debounce: 500 }"
+                    unique-email
+                    required
+                    placeholder="Email address">
+                <span ng-messages="personalForm.inputEmail.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="personalForm.inputEmail.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button"
+                class="btn btn-large"
+                back-button>
+                Back
+            </button>
+            <button 
+                type="submit"
+                class="btn btn-primary btn-large"
+                ng-controller="InitialCreationCtrl"
+                spinner="createAccount()"
+                ng-disabled="!personalForm.$valid">
+                Continue
+            </button>
+        </div>
+    </fieldset>
+</form>

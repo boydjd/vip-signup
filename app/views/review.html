@@ -1,0 +1,185 @@
+<div ng-include="'views/gca/progress.html'"></div>
+
+<form editable-form name="details" novalidate class="well well-large">
+    <div class="buttons">
+        <strong>Your Details</strong>
+        <button type="button" ng-click="details.$show()" ng-show="!details.$visible" tooltip="Edit"><i class="fa fa-edit fa-2x"></i></button>
+        <span ng-show="details.$visible">
+            <button type="submit" ng-disabled="details.$waiting" tooltip="Save">
+                <i class="fa fa-save fa-2x"></i> 
+            </button>
+            <button type="button" ng-disabled="details.$waiting" ng-click="details.$cancel()" tooltip="Cancel">
+                <i class="fa fa-times fa-2x"></i>
+            </button>
+        </span>
+    </div>
+    <div>
+        <span class="title">Your Phone Number: </span>
+        <span editable-tel="signup.user.phoneNumber" e-name="phoneNumber" e-required onbeforesave="checkUniquePhone($data, details.phoneNumber, signup.user.phoneNumber)">{{ (signup.user.phoneNumber | tel) || 'empty' }}</span>
+    </div>
+    <div>
+        <span class="title">Your email: </span>
+        <span editable-email="signup.user.email" e-name="email" e-required onbeforesave="checkUniqueEmail($data, details.email, signup.user.email)">{{ signup.user.email || 'empty' }}</span>
+    </div>
+</form>
+
+<form editable-form name="contactsForm" novalidate class="well well-large" ng-if="signup.contact.firstName">
+    <div class="buttons">
+        <strong>Your Contacts</strong>
+        <button ng-if="false" type="button" ng-click="contactsForm.$show()" ng-show="!contactsForm.$visible" tooltip="Edit">
+            <i class="fa fa-edit fa-2x"></i>
+        </button>
+        <span ng-show="contactsForm.$visible">
+            <button type="submit" ng-disabled="contactsForm.$waiting" tooltip="Save">
+                <i class="fa fa-save fa-2x"></i>
+            </button>
+            <button type="button" ng-disabled="contactsForm.$waiting" ng-click="contactsForm.$cancel()" tooltip="Cancel">
+                <i class="fa fa-times fa-2x"></i>
+            </button>
+        </span>
+    </div>
+    <div>
+        <span class="title">Contact name: </span>
+        <span editable-text="signup.contact.firstName" e-name="name" e-required onbeforesave="checkEditableInput($data, contactsForm)">{{ signup.contact.firstName || 'empty' }}</span>
+    </div>
+    <div>
+        <span class="title">Phone type: </span>
+        <span editable-select="signup.contact.device" e-required e-name="phoneType" e-ng-options="p.value as p.text for p in phoneTypes" onbeforesave="checkEditableInput($data, contactsForm)">
+            {{ (phoneTypes | filter:{value: signup.contact.device})[0].text || 'Not set' }}
+        </span>
+    </div>
+    <div>
+        <span class="title">Phone number: </span>
+        <span editable-tel="signup.contact.phoneNumber" e-required e-name="phoneNumber" onbeforesave="checkEditableInput($data, contactsForm)">
+            {{ (signup.contact.phoneNumber | tel) || 'empty' }}
+        </span>
+    </div>
+</form>
+
+<form editable-form name="payment" novalidate class="well well-large">
+    <div class="buttons">
+        <strong>Payment Amount</strong>
+        <button type="button" ng-click="payment.$show()" ng-show="!payment.$visible" tooltip="Edit">
+            <i class="fa fa-edit fa-2x"></i>
+        </button>
+        <span ng-show="payment.$visible">
+            <button type="submit" ng-disabled="payment.$waiting" tooltip="Save">
+                <i class="fa fa-save fa-2x"></i>
+            </button>
+            <button type="button" ng-disabled="payment.$waiting" ng-click="payment.$cancel()" tooltip="Cancel">
+                <i class="fa fa-times fa-2x"></i>
+            </button>
+        </span>
+    </div>
+    <div>
+        <span class="title">Payment amount: </span>
+        <span editable-currency="signup.payment.amount" e-name="amount" e-required e-min="5" e-max="100" e-ng-pattern="/^\d+$/" e-inputmode="numeric" onbeforesave="checkEditableInput($data, payment.amount)">{{ signup.payment.amount || '0' | currency}}</span>
+    </div>
+    <div ng-show="signup.payment.bonus">
+        <span class="title">Bonus amount: </span>
+        <span>{{ signup.payment.bonus || '0' | currency }}</span>
+    </div>
+    <div>
+        <span class="title">Total opening balance: </span>
+        <span>{{ signup.payment.Total() || '0' | currency }}</span>
+    </div>
+    <div ng-if="signup.payment.referral">
+        <span class="title">Referred by: </span>
+        <span editable-text="signup.payment.referral" e-name="referral" onbeforesave="checkEditableInput(data, signup.payment.referral)">{{ signup.payment.referral || 'none' }}</span>
+    </div>
+</form>
+
+<form editable-form name="paymentMethod" novalidate class="well well-large" ng-if="signup.payment.method == 'creditCard'">
+    <div class="buttons">
+        <strong>Payment Method</strong>
+        <button type="button" ng-click="paymentMethod.$show()" ng-show="!paymentMethod.$visible" tooltip="Edit">
+            <i class="fa fa-edit fa-2x"></i>
+        </button>
+        <span ng-show="paymentMethod.$visible">
+            <button type="submit" ng-disabled="paymentMethod.$waiting" tooltip="Save">
+                <i class="fa fa-save fa-2x"></i>
+            </button>
+            <button type="button" ng-disabled="paymentMethod.$waiting" ng-click="paymentMethod.$cancel()" tooltip="Cancel">
+                <i class="fa fa-times fa-2x"></i>
+            </button>
+        </span>
+    </div>
+    <div>
+        <span class="title">Payment method: </span>
+        <span ng-switch on="signup.payment.method">
+            <span ng-switch-when="voucher">
+                Voucher
+            </span>
+        
+            <span ng-switch-default editable-select="signup.payment.card" e-name="card" e-ng-options="m.value as m.text for m in cardTypes" onbeforesave="checkEditableInput($data, paymentMethod.card)">
+                {{ signup.payment.card || 'Not set' | capitalize }}
+            </span>
+    </div>
+    <div>
+        <span class="title">Card number: </span>
+        <span editable-text="signup.payment.cardNumber" e-name="cardNumber" e-inputmode="numeric" e-required e-ng-pattern="/^[0-9]{13,16}$/" onbeforesave="checkEditableInput($data, paymentMethod.cardNumber)">{{ signup.payment.cardNumber | maskCreditCard }}</span>
+    </div>
+    <div>
+        <span class="title">Expiry date: </span>
+        <span editable-select="ccinfo.month" e-ng-options="month.text for month in months track by month.value" e-required e-name="cardExpiryMonth" onbeforesave="checkEditableInput($data, paymentMethod.cardExpiryMonth)">
+            {{ ccinfo.month.value || 'empty' }} /
+        </span>
+        <span editable-select="ccinfo.year" e-ng-options="year as year for year in [] | range:currentYear:currentYear+13" e-required e-name="cardExpiryYear" onbeforesave="checkEditableInput($data, paymentMethod.cardExpiryYear)">
+            {{ ccinfo.year || 'empty' }}
+        </span>
+    </div>
+</form>
+
+<form editable-form name="billingAddress" novalidate class="well well-large" ng-if="signup.payment.method == 'creditCard'">
+    <div class="buttons">
+        <strong>Billing Address</strong>
+        <button type="button" ng-click="billingAddress.$show()" ng-show="!billingAddress.$visible" tooltip="Edit">
+            <i class="fa fa-edit fa-2x"></i>
+        </button>
+        <span ng-show="billingAddress.$visible">
+            <button type="submit" ng-disabled="billingAddress.$waiting" tooltip="Save">
+                <i class="fa fa-save fa-2x"></i>
+            </button>
+            <button type="button" ng-disabled="billingAddress.$waiting" ng-click="billingAddress.$cancel()" tooltip="Cancel">
+                <i class="fa fa-times fa-2x"></i>
+            </button>
+        </span>
+    </div>
+    <div>
+        <span class="title">Street address: </span>
+        <span editable-text="signup.payment.streetAddress" e-name="streetAddress" e-required onbeforesave="checkEditableInput($data, billingAddress.streetAddress)">{{ signup.payment.streetAddress || 'none' }}</span>
+    </div>
+    <div>
+        <span class="title">Town / City: </span>
+        <span editable-text="signup.payment.city" e-name="city" e-required onbeforesave="checkEditableInput($data, billingAddress.city)">{{ signup.payment.city || 'none' }}</span>
+    </div>
+    <div>
+        <span class="title">State: </span>
+        <span editable-select="signup.payment.state" onshow="loadStates()" e-ng-options="s.value as s.text for s in states" e-name="state" e-required onbeforesave="checkEditableInput($data, billingAddress.state)">{{ signup.payment.state || 'none' }}</span>
+    </div>
+    <div>
+        <span class="title">ZIP code / Postal code: </span>
+        <span editable-text="signup.payment.zip" e-name="zip" e-required onbeforesave="checkEditableInput($data, billingAddress.zip)">{{ signup.payment.zip || 'none' }}</span>
+    </div>
+    <div>
+        <span class="title">Country: </span>
+        <span editable-select="signup.payment.country" onshow="loadCountries()" e-ng-options="c.value as c.text for c in countries" e-name="country" e-required onbeforesave="checkEditableInput($data, billingAddress.country)">{{ signup.payment.country || 'none' }}</span>
+    </div>
+</form>
+
+<form name="conditionsForm" novalidate class="well well-large" accessible-form>
+    <fieldset>
+        <div class="control-group" ng-class="getCssClasses(conditionsForm.inputAcceptance)">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" id="inputAcceptance" name="inputAcceptance" ng-model="signup.acceptance" required>
+                    You must accept our <a ng-controller="TermsModalCtrl" href ng-click="open()">Terms &amp; Conditions</a>
+                    and <a ng-controller="PrivacyModalCtrl" href ng-click="open()">Privacy Policy</a>
+                </label>
+            </div>
+            <div class="form-actions">
+                <button ng-disabled="conditionsForm.$invalid" type="submit" class="btn btn-primary btn-large" spinner="submitSignup()">Confirm</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

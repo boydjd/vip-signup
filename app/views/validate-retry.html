@@ -1,0 +1,26 @@
+<div ng-include="'views/progress.html'"></div>
+
+<form name="validationForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend><h1 class="panel-material-title">Didn't receive your test setup call?</h1></legend>
+        <div class="control-group" ng-class="getCssClasses(validationForm.inputPhoneNumber)">
+            <label class="control-label" for="inputPhoneNumber">Send another call to:</label>
+            <div class="controls">
+                <select id="inputBillingCountry" name="inputBillingCountry" class="bfh-countries" data-blank="false" ng-model="signup.payment.country" required country-picker></select>
+                <span ng-messages="validationForm.inputBillingCountry.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="validationForm.inputBillingCountry.$dirty">
+                </span>
+                <input type="tel" id="inputPhoneNumber" name="inputPhoneNumber" class="bfh-phone" ng-model="signup.user.phoneNumber" ng-model-options="{ debounce: 500 }" unique-phone required placeholder="Phone number" phone-format data-country="inputBillingCountry" data-number="{{signup.user.phoneNumber}}" validate-phone country="{{signup.payment.country}}" ng-minlength="10">
+                <span ng-messages="validationForm.inputPhoneNumber.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="validationForm.inputPhoneNumber.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="btn btn-large" back-button>Back</button>
+            <button type="submit" class="btn btn-primary btn-large" ng-disabled="validationForm.$invalid" ui-sref="gca.validate">Continue</button>
+        </div>
+    </fieldset>
+</form>

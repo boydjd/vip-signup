@@ -1,0 +1,354 @@
+<form id="paymentForm" name="paymentForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend>
+            <h1 class="panel-material-title">
+                Welcome to VIP, {{ signup.user.firstName }}! Please make a payment to get started.
+            </h1>
+        </legend>
+        <div class="control-group">
+            <label class="control-label">
+                What payment method would you like to use?
+            </label>
+            <div class="controls">
+                <label class="radio inline">
+                    <input type="radio" ng-model="signup.payment.method" class="hidden" value="creditCard">
+                    <img ng-click="fixIEClick($event)" ng-class="{ 'dim' : signup.payment.method != 'creditCard' && signup.payment.method }" src="img/credit-debit-trans.png"img>
+                </label>
+                <label class="radio inline">
+                    <input type="radio" ng-model="signup.payment.method" class="hidden" value="voucher">
+                    <img ng-click="fixIEClick($event); signup.payment.promotionCode = undefined;" ng-class="{ 'dim': signup.payment.method != 'voucher' && signup.payment.method }" src="img/vip-voucher-trans.png"img>
+                </label>
+            </div>
+        </div>
+    </fieldset>
+        <fieldset class="form-horizontal">
+        <div class="control-group" ng-show="signup.payment.method" ng-class="getCssClasses(paymentForm.inputPromotionCode)">
+            <label ng-if="signup.payment.method == 'creditCard'" class="control-label" for="inputPromotionCode">
+                Do you have a promotional code?
+            </label>
+            <label ng-if="signup.payment.method == 'voucher'" class="control-label" for="inputPromotionCode">
+                Do you have a voucher?
+            </label>
+            <div class="controls">
+                <input type="text"
+                       name="inputPromotionCode" 
+                       id="inputPromotionCode"
+                       ng-model="signup.payment.promotionCode"
+                       ng-model-options="{ debounce: 500 }"
+                       validate-promotion
+                       descfield="promoDesc"
+                       amountmodel="{{signup.payment.amount}}"
+                       placeholder="Enter code">
+                <span ng-messages="paymentForm.inputPromotionCode.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="paymentForm.inputPromotionCode.$dirty">
+                </span>
+                <span ng-show="paymentForm.inputPromotionCode.$valid" class="help-block">
+                    {{ signup.payment.promoDesc }}
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-show="signup.payment.method" ng-class="getCssClasses(paymentForm.inputReferral)">
+            <label class="control-label" for="inputReferral">
+                Did someone refer you?
+            </label>
+            <div class="controls">
+                <input type="text"
+                       name="inputReferral"
+                       id="inputReferral"
+                       ng-model="signup.payment.referral"
+                       ng-model-options="{ debounce: 500 }"
+                       placeholder="Phone number or email"
+                       validate-referral>
+                <span ng-messages="paymentForm.inputReferral.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="paymentForm.inputReferral.$dirty">
+                </span>
+                <span class="help-block">
+                    {{ signup.payment.referralDesc }}
+                </span>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="control-group"
+             ng-if="signup.payment.method == 'creditCard'"
+             ng-class="getCssClasses(paymentForm.inputPaymentAmount)">
+             <label class="control-label" for="inputPaymentAmount">
+                 How much would you like to open your account with?
+             </label>
+            <div class="controls">
+                <label class="radio inline" ng-class="{ 'dim' : signup.payment.amount != 5 }">
+                    <input type="radio" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="5" name="inputPaymentAmount" integer>
+                    $5
+                </label>
+                <label class="radio inline" ng-class="{ 'dim' : signup.payment.amount != 10 }">
+                    <input type="radio" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="10" name="inputPaymentAmount" integer>
+                    $10
+                </label>
+                <label class="radio inline" ng-class="{ 'dim' : signup.payment.amount != 25 }">
+                    <input type="radio" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="25" name="inputPaymentAmount" integer>
+                    $25
+                </label>
+                <label class="radio inline" ng-class="{ 'dim' : signup.payment.amount != 50 }">
+                    <input type="radio" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="50" name="inputPaymentAmount" integer>
+                    $50
+                </label>
+                <label class="radio inline" ng-class="{ 'dim' : signup.payment.amount != 100 }">
+                    <input type="radio" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="100" name="inputPaymentAmount" integer>
+                    $100
+                </label>
+                <label class="radio inline" ng-class="{ 'dim' : [5,10,25,50,100].indexOf(signup.payment.amount) !== -1}">
+                    <input type="radio" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="0" name="inputPaymentAmount" integer>
+                    Other
+                </label>
+
+                <br>
+                <br>
+                <div class="input-prepend" ng-show="[5,10,25,50,100].indexOf(signup.payment.amount) === -1">
+                    <span class="add-on"> $ </span>
+                    <input type="number" min="5" max="100" name="inputPaymentAmount" id="inputPaymentAmount" ng-model="signup.payment.amount" ng-model-options="{ debounce: 500 }"  ng-required="[5,10,25,50,100].indexOf(signup.payment.amount) === -1" integer class="input-mini">
+                </div>
+                <span ng-messages="paymentForm.inputPaymentAmount.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="paymentForm.inputPaymentAmount.$dirty">
+                    <span ng-message="integer" class="help-inline">
+                        Not a valid amount
+                    </span>
+                    <span ng-message="min" class="help-inline">
+                        Amount must be more than $5
+                    </span>
+                    <span ng-message="max" class="help-inline">
+                        Amount cannot be more than $100
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-if="signup.payment.method == 'creditCard'" ng-show="signup.payment.amount">
+            <div class="controls">
+                <label class="radio">
+                    <input type="radio" ng-model="signup.payment.saveCard" value="save">
+                    Save this card for future recharges <i class="fa fa-question-circle" popover="Saving your card information is safe and secure with VIP. We only save the last 4 digits of your card number in our system, so you can make future recharges easily and quickly without having to worry about security." popover-trigger="mouseenter"></i>
+                </label>
+                <label class="radio">
+                    <input type="radio" ng-model="signup.payment.saveCard" value="autoRecharge">
+                    Save this card and setup Auto recharge my account <i class="fa fa-question-circle" popover="Your account will automatically recharge for the amount you select when the balance falls below $5. Select this option to make sure your calls never get disconnected." popover-trigger="mouseenter"></i>
+                </label>
+                <div class="control-group" ng-show="signup.payment.saveCard == 'autoRecharge'" ng-class="getCssClasses(paymentForm.inputPaymentAutoRechargeAmount)">
+                    <div class="controls">
+                        <label class="radio inline" ng-class="{ 'dim' : signup.payment.autoRecharge.amount != 5 }">
+                            <input type="radio" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="5" name="inputPaymentAutoRechargeAmount" integer>
+                            $5
+                        </label>
+                        <label class="radio inline" ng-class="{ 'dim' : signup.payment.autoRecharge.amount != 10 }">
+                            <input type="radio" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="10" name="inputPaymentAutoRechargeAmount" integer>
+                            $10
+                        </label>
+                        <label class="radio inline" ng-class="{ 'dim' : signup.payment.autoRecharge.amount != 25 }">
+                            <input type="radio" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="25" name="inputPaymentAutoRechargeAmount" integer>
+                            $25
+                        </label>
+                        <label class="radio inline" ng-class="{ 'dim' : signup.payment.autoRecharge.amount != 50 }">
+                            <input type="radio" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="50" name="inputPaymentAutoRechargeAmount" integer>
+                            $50
+                        </label>
+                        <label class="radio inline" ng-class="{ 'dim' : signup.payment.autoRecharge.amount != 100 }">
+                            <input type="radio" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="100" name="inputPaymentAutoRechargeAmount" integer>
+                            $100
+                        </label>
+                        <label class="radio inline" ng-class="{ 'dim' : [5,10,25,50,100].indexOf(signup.payment.autoRecharge.amount) !== -1}">
+                            <input type="radio" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" class="hidden" value="0" name="inputPaymentAutoRechargeAmount" integer>
+                            Other
+                        </label>
+
+                        <br>
+                        <br>
+                        <div class="input-prepend" ng-show="[5,10,25,50,100].indexOf(signup.payment.autoRecharge.amount) === -1">
+                            <span class="add-on"> $ </span>
+                            <input type="number" min="5" max="100" ng-model="signup.payment.autoRecharge.amount" ng-model-options="{ debounce: 500 }" ng-required="signup.payment.saveCard === 'autoRecharge' && [5,10,25,50,100].indexOf(signup.payment.autoRecharge.amount) === -1" integer class="input-mini" name="inputPaymentAutoRechargeAmount">
+                        </div>
+                        <span ng-messages="paymentForm.inputPaymentAutoRechargeAmount.$error"
+                            ng-messages-include="views/messages.html"
+                            ng-if="paymentForm.inputPaymentAutoRechargeAmount.$dirty">
+                            <span ng-message="number" class="help-inline">
+                                Not a valid amount
+                            </span>
+                            <span ng-message="min" class="help-inline">
+                                Amount must be more than $5
+                            </span>
+                            <span ng-message="max" class="help-inline">
+                                Amount cannot be more than $100
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <label class="radio">
+                    <input type="radio" ng-model="signup.payment.saveCard" value="dontSave">
+                    Don't save card
+                </label>
+            </div>
+        </div>
+
+        <fieldset ng-if="signup.payment.method == 'creditCard'" ng-show="!angular.isUndefined(signup.payment.saveCard)">
+            <legend>What are your card details?
+            </legend>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputCardNumber)">
+                <label class="control-label" for="inputCardNumber">Card Number</label>
+                <div class="controls">
+                    <input type="text" id="inputCardNumber" name="inputCardNumber" class="input-medium" ng-model="signup.payment.cardNumber" payments-validate="card" payments-format="card" payments-type-model="signup.payment.card" placeholder="4444-4444-4444-4444" required>
+                    <i class="ccs" ng-class="'ccs-' + signup.payment.card" style="font-size:4em"><span></span></i>
+                    <span ng-messages="paymentForm.inputCardNumber.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputCardNumber.$dirty">
+                    </span>
+                    <span class="pull-right">
+                        <img src="img/vip-card-types.png">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputCardExpiryMonth)">
+                <label class="control-label" for="inputCardExpiry">Expiry Date</label>
+                <div class="controls">
+                    <select id="inputCardExpiryMonth" name="inputCardExpiryMonth" ng-model="ccinfo.month" card-expiration required class="input-medium" ng-options="month.text for month in months track by month.value">
+                        <option value="">Select month</option>
+                    </select>
+                    <select id="inputCardExpiryYear" name="inputCardExpiryYear" ng-model="ccinfo.year" name="year" required class="input-small">
+                        <option disabled selected value="">Year</option>
+                        <option ng-repeat="year in [] | range:currentYear:currentYear+13">{{year}}</option>
+                    </select>
+                    <span ng-messages="paymentForm.inputCardExpiryMonth.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputCardExpiryMonth.$dirty && paymentForm.inputCardExpiryYear.$dirty">
+                    </span>
+                    <span class="pull-right">
+                        <img src="img/godaddy.png" style="cursor:pointer">
+                        <img src="img/verisign.gif" style="cursor:pointer">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputCardCvc)">
+                <label class="control-label" for="inputCardCvc">Card Security Code</label>
+                <div class="controls">
+                    <input type="text"
+                        id="inputCardCvc"
+                        name="inputCardCvc"
+                        class="input-mini"
+                        ng-model="signup.payment.cardCvc"
+                        ng-minlength="3"
+                        ng-maxlength="3"
+                        required 
+                        placeholder="123">
+                    <span ng-messages="paymentForm.inputCardCvc.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputCardCvc.$dirty">
+                        <span ng-message="min" class="help-inline">
+                            Must be 3 digits 
+                        </span>
+                        <span ng-message="max" class="help-inline">
+                            Must be 3 digits
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset ng-if="signup.payment.method == 'creditCard'" ng-show="paymentForm.inputCardNumber.$valid && paymentForm.inputCardCvc.$valid && paymentForm.inputCardExpiryMonth.$valid && paymentForm.inputCardExpiryYear.$valid">
+            <legend>What is the billing address for this card?</legend>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputBillingStreetAddress)">
+                <label class="control-label" for="inputBillingStreetAddress">Street address</label>
+                <div class="controls">
+                    <input type="text" id="inputBillingStreetAddress" name="inputBillingStreetAddress" ng-model="signup.payment.streetAddress" required placeholder="Street address">
+                    <span ng-show="showError(paymentForm.inputBillingStreetAddress, 'required')" class="help-inline">
+                        Required
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputBillingCity)">
+                <label class="control-label" for="inputBillingCity">Town / City</label>
+                <div class="controls">
+                    <input type="text" id="inputBillingCity" name="inputBillingCity" ng-model="signup.payment.city" required placeholder="Town/City">
+                    <span ng-messages="paymentForm.inputBillingCity.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputBillingCity.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputBillingState)">
+                <label class="control-label" for="inputBillingState">State</label>
+                <div class="controls">
+                    <select id="inputBillingState" name="inputBillingState" class="bfh-states" data-country="inputBillingCountry" data-state="{{signup.payment.state}}" ng-model="signup.payment.state" data-blank="false" required state-picker></select>
+                    <span ng-messages="paymentForm.inputBillingState.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputBillingState.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputBillingZip)">
+                <label class="control-label" for="inputBillingZip">ZIP code / Postal code</label>
+                <div class="controls">
+                    <input type="text" id="inputBillingZip" name="inputBillingZip" class="input-mini" ng-model="signup.payment.zip" required placeholder="Postal code" ng-minlength="5">
+                    <span ng-messages="paymentForm.inputBillingZip.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputBillingZip.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.inputBillingCountry)">
+                <label class="control-label" for="inputBillingCountry">Country</label>
+                <div class="controls">
+                    <select id="inputBillingCountry" name="inputBillingCountry" class="bfh-countries" data-blank="false" ng-model="signup.payment.country" required country-picker></select>
+                    <span ng-messages="paymentForm.inputBillingCountry.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.inputBillingCountry.$dirty">
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset ng-show="signup.payment.method == 'voucher' || (paymentForm.inputBillingStreetAddress.$valid && paymentForm.inputBillingCity.$valid && paymentForm.inputBillingState.$valid && paymentForm.inputBillingZip.$valid && paymentForm.inputBillingCountry.$valid)">
+            <legend></legend>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.leadSource)">
+                <label class="control-label">How did you hear about VIP?</label>
+                <div class="controls">
+                    <select id="leadSource" name="leadSource" ng-model="signup.payment.leadSource" ng-options="leadSource.value as leadSource.text for leadSource in leadSources" required>
+                    </select>
+                    <span ng-messages="paymentForm.leadSource.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.leadSource.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.password1)">
+                    <label class="control-label">Create a password <i class="fa fa-question-circle" popover="Password must be at least 7 characters long" popover-trigger="mouseenter"></i></label>
+                <div class="controls">
+                    <input type="password" id="password1" name="password1" required ng-model="signup.user.password1" ng-model-options="{ debounce: 500 }" placeholder="Enter password" ng-minlength="7">
+                    <span ng-messages="paymentForm.password1.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.password1.$dirty">
+                        <span ng-message="minlength" class="help-inline">
+                            Password must be at least 7 characters long
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(paymentForm.password2)">
+                <label class="control-label">Confirm password</label>
+                <div class="controls">
+                    <input type="password" id="password2" name="password2" ng-model="signup.user.password2" ng-model-options="{ debounce: 500 }" required pw-check="password1" placeholder="Enter password">
+                    <span ng-messages="paymentForm.password2.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="paymentForm.password2.$dirty">
+                        <span ng-message="pwmatch" class="help-inline">
+                            Passwords don't match!
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-actions" ng-show="paymentForm.$valid">
+            <button type="button" class="btn btn-large">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-large" ui-sref="gca.review">Review</button>
+        </div>
+    </fieldset>
+</form>

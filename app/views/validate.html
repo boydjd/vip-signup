@@ -1,0 +1,25 @@
+<div ng-include="'views/progress.html'"></div>
+
+<form name="validationForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend><h1 class="panel-material-title">We need to check your account set up.</h1></legend>
+        <p>In a moment, you will receive an automated call from our system that confirms your account is setup correctly.
+        <p><button type="button" class="btn btn-primary btn-large" ng-click="showForm = true" ng-show="!showForm">Continue</button> 
+        <div class="control-group" ng-class="getCssClasses(validationForm.inputPIN)" ng-show="showForm">
+            <label class="control-label" for="inputPIN">Please enter your confirmation PIN</label>
+            <div class="controls">
+                <input class="input-mini" type="number" min="0001" max="9999" name="inputPIN" id="inputPIN" ng-model="signup.PIN" ng-model-options="{ debounce: 500 }" required validate-pin call-sid="234234324" integer>
+                <span ng-messages="validationForm.inputPIN.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="validationForm.inputPIN.$dirty">
+                </span>
+            </div>
+            <p ng-hide="validationForm.$valid && validationForm.$dirty">Didn't receive our call? Click <a href="#/gca/validate-retry" ui-sref="gca.validate-retry">here</a> to request a new call
+            <p ng-hide="validationForm.$valid && validationForm.$dirty">If you're experiencing problems and need further assistance, please contact customer service at <a href="tel:+18008365004">1-800-836-5004<a>.
+        </div>
+        <div class="form-actions" ng-show="showForm">
+            <button type="button" class="btn btn-large" ui-sref="gca.congrats" ng-disabled="validationForm.$valid && validationForm.$dirty">Skip</button>
+            <button type="submit" class="btn btn-primary btn-large" ng-disabled="validationForm.$invalid" ng-click="signup.activation = true" ui-sref="gca.congrats">Confirm setup</button>
+        </div>
+    </fieldset>
+</form>

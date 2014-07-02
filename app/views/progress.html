@@ -1,0 +1,30 @@
+<div class="row-fluid hidden-phone">
+    <div class="progress" style="height: 2em;">
+        <span ng-if="state.current.name === 'gca.android' || state.current.name === 'gca.iphone' || state.current.name === 'gca.vipconnect'">
+            <div class="bar" ng-class="{'bar-success': state.current.name !== 'gca.vipconnect'}" style="width: 50%; font-size: 1.3em;">Your Details</div> 
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.vipconnect'}" style="width: 50%; font-size: 1.3em;">Make Your Free Call</div> 
+        </span>
+        <span ng-if="(signup.callingMethod === 'iPhone' || signup.callingMethod === 'Android') && state.current.name !== 'gca.android' && state.current.name !== 'gca.iphone' && state.current.name !== 'gca.vipconnect'">
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.step1'}" style="width: 33%; font-size: 1.3em;">Your Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.payment' || statue.current.name === 'gca.review'}" style="width: 33%; font-size: 1.3em;">Payment Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.validate' || state.current.name === 'gca.validate-retry'}" style="width: 34%; font-size: 1.3em;">Activate Account</div>
+        </span>
+        <span ng-if="signup.offer === 'minutes' && signup.callingMethod !== 'iPhone' && signup.callingMethod !== 'Android'">
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.step1'}" style="font-size: 1.3em; width: 25%">Your Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.step2'}" style="font-size: 1.3em; width: 25%">Add Contacts</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.validate' || state.current.name === 'gca.validate-retry'}" style="font-size: 1.3em; width: 25%">Check Setup</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.congrats'}" style="font-size: 1.3em; width: 25%">Make Your Free Call</div>
+        </span>
+        <span ng-if="signup.offer !== 'minutes' && signup.callingMethod !== 'iPhone' && signup.callingMethod !== 'Android' && signup.callingMethod !== 'hotel'">
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.step1'}" style="font-size: 1.3em; width: 25%">Your Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.step2'}" style="font-size: 1.3em; width: 25%">Add Contacts</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.payment' || state.current.name === 'gca.review'}" style="font-size: 1.3em; width: 25%">Payment Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.validate' || state.current.name === 'gca.validate-retry'}" style="font-size: 1.3em; width: 25%">Activate Account</div>
+        </span>
+        <span ng-if="signup.callingMethod === 'hotel'">
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.step1'}" style="font-size: 1.3em; width: 33%">Your Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.payment' || state.current.name === 'gca.review'}" style="font-size: 1.3em; width: 33%">Payment Details</div>
+            <div class="bar" ng-class="{'bar-success': state.current.name === 'gca.validate' || state.current.name === 'gca.validate-retry'}" style="font-size: 1.3em; width: 34%">Activate Account</div>
+        </span>
+    </div>
+</div>

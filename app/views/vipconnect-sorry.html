@@ -1,0 +1,46 @@
+<form name="notAvailableForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend>
+            <h1 class="panel-material-title">Sorry!!</h1>
+        </legend>
+        <p><strong>At this time VIP's {{ signup.callingMethod }} service is not available from your location.</strong></p> 
+        <p>We are expanding our service area, and will be available in your location soon. Please complete the form below and we will email you as soon as service is available.
+        <div class="well">
+            <div class="control-group" ng-class="getCssClasses(notAvailableForm.inputFirstName)">
+                <label class="control-label" for="inputFirstName">First Name</label>
+                <div class="controls">
+                    <input type="text" name="inputFirstName" id="inputFirstName" ng-model="signup.user.firstName" required>
+                    <span ng-messages="notAvailableForm.inputFirstName.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="notAvailableForm.inputFirstName.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(notAvailableForm.inputLastName)">
+                <label class="control-label" for="inputLastName">Last Name</label>
+                <div class="controls">
+                    <input type="text" id="inputLastName" name="inputLastName" ng-model="signup.user.lastName" required>
+                    <span ng-messages="notAvailableForm.inputLastName.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="notAvailableForm.inputLastName.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(notAvailableForm.inputEmail)">
+                <label class="control-label" for="inputEmail">Email Address</label>
+                <div class="controls">
+                    <input type="email" id="inputEmail" name="inputEmail" ng-model="signup.user.email" ng-model-options="{ debounce: 500 }" unique-email required>
+                    <span ng-messages="notAvailableForm.inputEmail.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="notAvailableForm.inputEmail.$dirty">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <p>You can still open a VIP account without the {{ signup.callingMethod }} app.
+        <div class="form-actions">
+            <button class="btn btn-large" back-button>Back</button>
+            <button type="submit" class="btn btn-primary btn-large" ng-disabled="notAvailableForm.$invalid" ui-sref="gca.step2">Continue</button>
+        </div>
+    </fieldset>
+</form>

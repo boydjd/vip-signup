@@ -1,0 +1,47 @@
+<div ng-include="'views/progress.html'"></div>
+
+<form name="vipconnectResendForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend>
+            <h1 class="panel-material-title">Didn't receive your text message?</h1>
+        </legend>
+        <div class="well">
+            <div class="control-group" ng-class="getCssClasses(vipconnectResendForm.inputPhoneNumber)">
+                <label class="control-label" for="inputPhoneNumber">Send another text to:</label>
+                <div class="controls">
+                    <select id="inputBillingCountry"
+                        name="inputBillingCountry"
+                        class="bfh-countries"
+                        data-blank="false"
+                        ng-model="signup.payment.country"
+                        required
+                        country-picker>
+                    </select>
+                    <input type="tel"
+                        id="inputPhoneNumber"
+                        name="inputPhoneNumber"
+                        class="bfh-phone"
+                        ng-model="signup.user.phoneNumber"
+                        ng-model-options="{ debounce: 500 }"
+                        required
+                        placeholder="Phone number"
+                        phone-format
+                        data-country="inputBillingCountry"
+                        data-number="{{signup.user.phoneNumber}}"
+                        validate-phone
+                        country="{{signup.payment.country}}"
+                        ng-minlength="10">
+                    <span ng-messages="vipconnectResendForm.inputPhoneNumber.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="vipconnectResendForm.inputPhoneNumber.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="form-actions" ng-switch on="signup.payment.country">
+                <button class="btn btn-primary btn-large" back-button>Back</button>
+                <button ng-controller="SendAppLinkCtrl" spinner="send(signup.callingMethod, signup.user.phoneNumber)" ng-switch-when="US" type="submit" class="btn btn-primary btn-large" ng-disabled="vipconnectResendForm.$invalid">Continue</button>
+                <button ng-switch-default type="submit" class="btn btn-primary btn-large" ng-disabled="vipconnectResendForm.$invalid" ui-sref="gca.vipconnect-unavailable">Continue</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

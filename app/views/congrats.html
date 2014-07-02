@@ -1,0 +1,89 @@
+<div ng-include="'views/gca/progress.html'"></div>
+<span>
+    {{ signup }}
+</span>
+
+<div class="row-fluid">
+    <h1 style="color: #2895c0;">Congratulations!</h1>
+    <p ng-if="!signup.activation">You're one step away from making your first call.</p>
+    <span ng-if="signup.activation">
+        <p ng-if="signup.offer == 'minutes'">You're ready to try VIP for free.</p>
+        <p ng-if="signup.offer == 'dollars'">You're ready to make your first call from {{signup.user.phoneNumber}}.</p>
+        <ul ng-if="(signup.callingMethod === 'iPhone' || signup.callingMethod === 'Android')">
+            <li ng-if="signup.callingMethod === 'Android'">Download VIPConnect <a href="https://play.google.com/store/apps/details?id=com.vipaccess.vipconnect">here</a>.
+            <li ng-if="signup.callingMethod === 'iPhone'">Download VIPConnect <a href="itms://itunes.com/apps/vipconnect">here</a>.
+            <ul>
+                <li>Log in using your phone number and the password you set up
+            </ul>
+            <li>On your smartphone, open your Contacts List and select the contact you wish to call.
+            <li>From the dialer, dial your number (e.g. 011+Country Code+Number)
+        </ul>
+        <ul ng-if="(signup.callingMethod !== 'iPhone' && signup.callingMethod !== 'Android')">
+            <li ng-if="signup.contact.firstName">Dial <h3 style="display:inline"><a href="tel:+17037968501">703-796-8501</a></h3><sup>*</sup> to reach {{ signup.contact.firstName }}'s {{ signup.contact.device }}
+            <li ng-if="!signup.contact.firstName">Dial <h3 style="display:inline"><a href="tel:+17037968000">703-796-8000</a></h3><sup>*</sup>
+            <li ng-if="!signup.contact.firstName">Dial your number: e.g. 011+Country Code+Number
+            <li ng-if="dlg.number">Give {{ signup.contact.firstName || 'your friends' }} your Direct Line Ghana Number: <h3 style="display:inline"><a href="tel:{{ dlg.number }}">{{ dlg.number }}</a></h3> and have them call you.
+            <li ng-if="!dlg.number || signup.offer !== 'minutes'">Make dialing easier, <a href="#">click here</a> to get local numbers for all of your contacts!
+            <li ng-if="signup.offer !== 'minutes'">Don't get caught short of calling credit. <a href="#">Click here</a> to add credit to your account.
+            <li ng-if="signup.offer === 'minutes'">Your first 5 minutes are FREE. If you want to talk for longer, <a href ui-sref="gca.payment">click here</a> to add credit to your account.
+        </ul>
+    </span>
+    <span ng-if="!signup.activation">
+        <span ng-if="signup.callingMethod === 'hotel'">
+            <ul>
+                <li>A representative will be calling you shortly to activate your account.
+            </ul>
+            <ul>
+                <li ng-if="signup.callingMethod !== 'hotel'">Once your account has been activated:
+                <li ng-if="signup.callingMethod === 'hotel'">How to call from a hotel phone<sup>*</sup> or payphone<sup>**</sup> once your account has been activated:
+                    <ul>
+                        <li>Dial <a href="tel:+18008365006"><strong>1-800-836-5006</strong></a>
+                        <li>Enter your PIN
+                        <li>Dial your number: <strong>e.g. 011+Country Code+Number</strong>
+                        <span ng-if="signup.callingMethod === 'hotel'">
+                            <li><sup>*</sup> Some hotels charge for calls to toll free numbers. Please check with your hotel before dialing.
+                            <li><sup>**</sup> Calls from payphones are subject to a 55&cent; per call payphone recovery charge as defined by the FCC
+                        </span>
+                    </ul>
+            </ul>
+        </span>
+        <ul ng-if="!signup.activation && signup.callingMethod !== 'hotel'">
+            <li>We need you to activate your account, please <a ui-sref="gca.validate">click here</a>.
+        </ul>
+    </span>
+
+    <span ng-if="(signup.payment.amount > 0 && signup.payment.cardNumber)|| signup.payment.method === 'voucher'">
+        <hr>
+        <h2>Thank you for your payment</h2>
+        <ul>
+            <li>Your Opening Balance: {{signup.payment.amount | currency}}
+            <li>Bonus Amount: {{signup.payment.bonus || 0 | currency}}
+            <li>Payment Method: {{signup.payment.card || signup.payment.method | capitalize}}
+            <li ng-if="signup.payment.method === 'creditCard'">Card Number: {{ signup.payment.cardNumber | maskCreditCard }}
+        </ul>
+    </span>
+
+    <hr>
+
+    <p>Got questions? Our friendly and knowledgeable representatives are standing by to help you. Call us at <a href="tel:+18008365004">1-800-836-5004</a> now, or email us at <a href="mailto:customerservice@joinvip.com">customerservice@joinvip.com</a>.</p>
+
+    <div class="form-actions">
+        <button class="btn btn-primary btn-large" ui-sref="gca.payment" ng-if="signup.offer == 'minutes'">Add Credit</button>
+        <button class="btn btn-primary btn-large" ng-if="signup.offer != 'minutes' && signup.activation" onclick="window.location = 'https://www.lilinux.joinvip.com/myaccount/login.php'">Login</button>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="span4 text-center"><a href="https://www.facebook.com/VIP.Communications" class="btn btn-large btn-info btn-block">Like us on Facebook</a></div>
+        <div class="span4 text-center" ng-if="signup.callingMethod !== 'iPhone' && signup.callingMethod !== 'Android'"><a href="#" class="btn btn-large btn-info btn-block">Why VIP</a></div>
+        <div class="span4 text-center" ng-if="signup.callingMethod === 'iPhone' || signup.callingMethod === 'Android'"><a href="#" class="btn btn-large btn-info btn-block">How it Works</a></div>
+        <div class="span4 text-center"><a href="#" class="btn btn-large btn-info btn-block">Contact Us</a></div>
+    </div>
+</div> 
+
+<div class="row-fluid" ng-if="signup.callingMethod !== 'hotel'">
+    <div class="span12">
+        <p><small><sup>*</sup>Please check with your service provider to ensure they don't charge for calls to this number. To avoid any such charges, use our toll free access number <a href="tel:+18008365006">1-800-836-5006</a>. VIP is not liable for any such charges.</small></p>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<form name="dlgForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend><h1 class="panel-material-title">Get your own Direct Line Number now!</h1></legend>
+        <div class="control-group" ng-class="getCssClasses(personalForm.inputFirstName)">
+            <label class="control-label" for="inputFirstName">Country</label>
+            <div class="controls">
+                <select id="country"
+                    name="country"
+                    ng-model="signup.dlg.country"
+                    ng-options="dlgCountry.name for dlgCountry in dlgCountries"
+                    required
+                    disabled>
+                </select>
+                <span ng-messages="dlgForm.country.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="dlgForm.country.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Your Direct Line number</label>
+            <div class="controls">
+                <input type="text"
+                    ng-model="dlg.number"
+                    required
+                    disabled>
+            </div>
+        </div>
+        <div class="control-group" ng-class="getCssClasses(dlgForm.inputPhoneNumber)">
+            <label class="control-label" for="inputPhoneNumber">Phone Number</label>
+            <div class="controls">
+                <select id="inputBillingCountry"
+                    name="inputBillingCountry"
+                    class="bfh-countries"
+                    data-blank="false"
+                    ng-model="signup.payment.country"
+                    required
+                    country-picker>
+                </select>
+                <input type="tel"
+                    id="inputPhoneNumber"
+                    name="inputPhoneNumber"
+                    class="bfh-phone"
+                    ng-model="signup.user.phoneNumber"
+                    ng-model-options="{ debounce: 500 }"
+                    unique-phone
+                    required
+                    placeholder="Phone number"
+                    phone-format
+                    data-country="inputBillingCountry"
+                    data-number="{{signup.user.phoneNumber}}"
+                    validate-phone country="{{signup.payment.country}}"
+                    ng-minlength="10">
+                <span ng-messages="dlgForm.inputPhoneNumber.$error"
+                    ng-messages-include="views/messages.html"
+                    ng-if="dlgForm.inputPhoneNumber.$dirty">
+                </span>
+            </div>
+        </div>
+        <div class="control-group" ng-if="dlgForm.$valid">
+            <label class="control-label">Rate per minute</label>
+            <div class="controls">
+                <strong><span ng-model="signup.user.phoneNumber" dlg-rate></span></strong>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit"
+                class="btn btn-primary btn-large"
+                ng-disabled="dlgForm.$invalid"
+                ui-sref="gca.step1">
+                Continue
+            </button>
+        </div>
+    </fieldset>
+</form>

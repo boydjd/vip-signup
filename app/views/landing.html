@@ -1,0 +1,49 @@
+<form ng-submit="">
+    <fieldset class="text-center">
+        <legend class="text-center"><h1 class="panel-material-title">How do you want to make your calls?</h1></legend>
+        <br>
+        <label class="radio inline text-center" >
+            <input class="hidden" type="radio" ng-model="signup.callingMethod" value="iPhone">
+            <i class="fa fa-fw icon-iphone" tooltip="{{(!isIOS) ? 'iPhone' : ''}}"></i>
+            <br class="hidden-desktop"><span class="hidden-desktop">iPhone</span>
+        </label>
+        <label class="radio inline text-center">
+            <input class="hidden" type="radio" ng-model="signup.callingMethod" value="Android">
+            <i class="fa fa-fw icon-android" tooltip="{{(!isIOS) ? 'Android' : ''}}"></i>
+            <br class="hidden-desktop"><span class="hidden-desktop">Android</span>
+        </label>
+        <label class="radio inline text-center">
+            <input class="hidden" type="radio" ng-model="signup.callingMethod" value="blackberry">
+            <i class="fa fa-fw icon-blackberry" tooltip="{{(!isIOS) ? 'BlackBerry' : ''}}"></i>
+            <br class="hidden-desktop"><span class="hidden-desktop">BlackBerry</span>
+        </label>
+        <label class="radio inline text-center">
+            <input class="hidden" type="radio" ng-model="signup.callingMethod" value="mobile">
+            <i class="fa fa-fw icon-cellphone" tooltip="{{(!isIOS) ? 'Other Mobile' : ''}}"></i>
+            <br class="hidden-desktop"><span class="hidden-desktop">Other Mobile</span>
+        </label>
+        <label class="radio inline text-center">
+            <input class="hidden" type="radio" ng-model="signup.callingMethod" value="landline">
+            <i class="fa fa-fw icon-landline" tooltip="{{(!isIOS) ? 'Landline' : ''}}"></i>
+            <br class="hidden-desktop"><span class="hidden-desktop">Landline</span>
+        </label>
+        <label class="radio inline text-center">
+            <input class="hidden" type="radio" ng-model="signup.callingMethod" value="hotel">
+            <i class="fa fa-fw icon-hotel" tooltip="{{(!isIOS) ? 'Hotel/Payphone' : ''}}"></i>
+            <br class="hidden-desktop"><span class="hidden-desktop">Hotel/Payphone</span>
+        </label>
+    </fieldset>
+    <br>
+    <fieldset id="selectOffer" ng-show="signup.callingMethod" class="text-center">
+        <legend class="text-center"><h2 class="panel-material-title">Select your offer</h2></legend>
+        <div class="span8 offset2">
+        <input type="submit" class="btn btn-front btn-block" value="Open a full account now and get $5 FREE" ui-sref="gca.step1" ng-click="signup.offer='dollars'"></input>
+        <br>
+        <span ng-switch on="signup.callingMethod" ng-hide="signup.callingMethod === 'hotel'">
+            <input ng-switch-when="iPhone" type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.iphone" ng-click="signup.offer='minutes'"></input>
+            <input ng-switch-when="Android" type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.android" ng-click="signup.offer='minutes'"></input>
+            <input ng-switch-default type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.step1" ng-click="signup.offer='minutes'"></input>
+        </span> 
+        </div>
+    </fieldset>
+</form>

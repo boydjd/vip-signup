@@ -1,0 +1,73 @@
+<div ng-include="'views/progress.html'"></div>
+
+<form name="iphoneAppForm" ng-submit="" novalidate>
+    <fieldset>
+        <legend>
+            <h1 class="panel-material-title">Enter your iPhone number</h1>
+        </legend>
+        <p>We will send you a text with a link to the App Store to download the VIPConnect<sup>&reg;</sup> app for iPhone</p>
+        <div class="well">
+            <div class="control-group" ng-class="getCssClasses(iphoneAppForm.inputPhoneNumber)">
+                <label class="control-label" for="inputPhoneNumber">iPhone number</label>
+                <div class="controls">
+                    <select id="inputBillingCountry"
+                        name="inputBillingCountry"
+                        class="bfh-countries"
+                        data-blank="false"
+                        ng-model="signup.payment.country"
+                        required
+                        country-picker>
+                    </select>
+                    <input type="tel"
+                        id="inputPhoneNumber"
+                        name="inputPhoneNumber"
+                        class="bfh-phone"
+                        ng-model="signup.user.phoneNumber"
+                        ng-model-options="{ debounce: 500 }"
+                        required
+                        placeholder="Phone number"
+                        phone-format
+                        data-country="inputBillingCountry"
+                        data-number="{{signup.user.phoneNumber}}"
+                        validate-phone
+                        country="{{signup.payment.country}}"
+                        ng-minlength="10">
+                    <span ng-messages="iphoneAppForm.inputPhoneNumber.$error"
+                        ng-messages-include="views/messages.html"
+                        ng-if="iphoneAppForm.inputPhoneNumber.$dirty">
+                    </span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="getCssClasses(iphoneAppForm.inputAcceptance)">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox"
+                            id="inputAcceptance"
+                            name="inputAcceptance"
+                            ng-model="signup.acceptance"
+                            required>
+                        You must accept our <a ng-controller="TermsModalCtrl" href ng-click="open()">Terms &amp; Conditions</a>
+                        and <a ng-controller="PrivacyModalCtrl" href ng-click="open()">Privacy Policy</a>
+                    </label>
+                </div>
+            </div>
+            <div class="form-actions" ng-switch on="signup.payment.country">
+                <button ng-controller="SendAppLinkCtrl"
+                    spinner="send()"
+                    ng-switch-when="US"
+                    type="submit"
+                    class="btn btn-primary btn-large"
+                    ng-disabled="iphoneAppForm.$invalid">
+                    Get app for free
+                </button>
+                <button ng-switch-default
+                    type="submit"
+                    class="btn btn-primary btn-large"
+                    ng-disabled="iphoneAppForm.$invalid"
+                    ui-sref="gca.vipconnect-unavailable">
+                    Get app for free
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
