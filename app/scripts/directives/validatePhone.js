@@ -17,7 +17,7 @@ angular.module('signupApp')
 
         if (value !== '' && typeof value !== 'undefined') {
           $http.get(
-            API_ENDPOINT + 'validate/phoneNumber',
+            API_ENDPOINT + '/rest/v1/validate/phoneNumber',
             {
                 params: {
                   phoneNumber: value,

@@ -10,9 +10,9 @@ angular.module('signupApp')
       var phoneNumber = signup.user.phoneNumber;
 
       if (device === 'Android') {
-        url = API_ENDPOINT + 'vipconnect/android/sendlink';
+        url = API_ENDPOINT + '/rest/v1/vipconnect/android/sendlink';
       } else { 
-        url = API_ENDPOINT + 'vipconnect/apple/sendlink'; 
+        url = API_ENDPOINT + '/rest/v1/vipconnect/apple/sendlink'; 
       } 
 
       var request = $http.get(url, { params: { phoneNumber: phoneNumber} });

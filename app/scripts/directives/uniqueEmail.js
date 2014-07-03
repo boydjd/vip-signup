@@ -19,7 +19,7 @@ angular.module('signupApp')
         setAsLoading(true);
         setAsAvailable(false);
 
-        $http.get(API_ENDPOINT + 'validate/uniqueEmail', { params: { email: value }})
+        $http.get(API_ENDPOINT + '/rest/v1/validate/uniqueEmail', { params: { email: value }})
         .success(function (data) {
           setAsLoading(false);
           setAsAvailable(data.resultSet.unique);

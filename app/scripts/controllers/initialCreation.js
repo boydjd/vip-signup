@@ -8,7 +8,7 @@ angular.module('signupApp')
 
       var request = $http({
         method: 'PUT',
-          url: API_ENDPOINT + 'signup',
+          url: API_ENDPOINT + '/rest/v1/signup',
           data: {
             fname: signup.user.firstName,
             lname: signup.user.lastName,

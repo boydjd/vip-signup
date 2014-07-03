@@ -65,13 +65,13 @@ module.exports = function (grunt) {
       development: {
         constants: {
           'ENV': 'development',
-          'API_ENDPOINT': "//192.168.100.96/rest/v1/"
+          'API_ENDPOINT': "//192.168.100.96"
         }
       },
       production: {
         constants: {
           'ENV': 'production',
-          'API_ENDPOINT': "/rest/v1/"
+          'API_ENDPOINT': ""
         }
       }
     },

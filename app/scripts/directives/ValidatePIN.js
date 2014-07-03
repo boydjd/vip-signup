@@ -16,7 +16,7 @@ angular.module('signupApp')
       function checkPIN(value) {
         if (value !== '' && typeof value !== "undefined" && !SignupService.activation) {
           $http.get(
-            API_ENDPOINT + 'activate/validatePIN',
+            API_ENDPOINT + '/rest/v1/activate/validatePIN',
             {
               params: {
                 pin: value,

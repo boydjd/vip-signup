@@ -144,8 +144,7 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'uuid4',
 
         return $http({
           method: 'POST',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          url: '//192.168.100.96/myaccount/directLine_ajax.php',
+          url: API_ENDPOINT + '/myaccount/directLine_ajax.php',
           data: dlgParams
         });
       }]

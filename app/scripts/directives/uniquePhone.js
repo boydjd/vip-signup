@@ -21,7 +21,7 @@ angular.module('signupApp')
         setAsLoading(true);
         setAsAvailable(false);
 
-        $http.get(API_ENDPOINT + 'validate/uniquePhoneNumber', { params: { phoneNumber: value }})
+        $http.get(API_ENDPOINT + '/rest/v1/validate/uniquePhoneNumber', { params: { phoneNumber: value }})
         .success(function (data) {
           setAsLoading(false);
           setAsAvailable(data.resultSet.unique);

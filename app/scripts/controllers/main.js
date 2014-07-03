@@ -57,41 +57,6 @@ angular.module('signupApp')
     {name: 'Ghana'}
   ];
 
-  $scope.finalizeAccount = function() {
-    /*
-        $inputArr['accountNumber'] = 'Auth::checkAccountNumber';
-        $inputArr['transactionType'] = 'is_numeric';
-        $inputArr['cardNumber'] = 'Auth::checkCreditCardNumber';
-        $inputArr['cardType'] = 'Auth::checkCreditCardType';
-        $inputArr['cardExpirationDate'] = 'Auth::verifyDate';
-        $inputArr['cardSecurityCode'] = 'Auth::checkCardSecurityCode';
-        $inputArr['billingZipCode'] = 'Auth::checkZipCode';
-        $inputArr['amount'] = 'Auth::checkAmount';
-        */
-    // update the account first in a $http call
-
-
-    
-    // then nest the payment $http call in the .success() handler of the account update call
-
-    if ($scope.ccinfo.month < 10) {
-      $scope.ccinfo.month = "0" + $scope.ccinfo.month;
-    }
-
-    $http({
-      url: API_ENDPOINT + 'payment/newCard/ivr',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      method: 'POST',
-      data: $.param({cardType: $scope.signup.payment.card, accountNumber: Account.accountId, transactionType: 6, cardNumber: $scope.signup.payment.cardNumber, cardExpirationDate: $scope.ccinfo.month + '/' + $scope.ccinfo.year, cardSecurityCode: $scope.signup.payment.cardCvc, billingZipCode: $scope.signup.payment.zip, amount: $scope.signup.payment.amount}) 
-    })
-    .success(function(data, status, headers, config) {
-    })
-    .error(function(data, status, headers, config) {
-    });
-
-    // return the promise here.
-  };
-
   /**
    * Expose alertService.closeAlert() to controller scope
    */
@@ -229,7 +194,7 @@ angular.module('signupApp')
 
     if (data !== undefined && data !== ngModelCtrl) {
       $http.get(
-        API_ENDPOINT + 'validate/uniquePhoneNumber',
+        API_ENDPOINT + '/rest/v1/validate/uniquePhoneNumber',
         {
           params: {
             accountNumber: Account.accountId, 
@@ -260,7 +225,7 @@ angular.module('signupApp')
 
     if (data !== undefined && data !== ngModelCtrl) {
       $http.get(
-        API_ENDPOINT + 'validate/uniqueEmail',
+        API_ENDPOINT + '/rest/v1/validate/uniqueEmail',
         {
           params: {
             accountNumber: Account.accountId,
@@ -360,7 +325,7 @@ angular.module('signupApp')
   $scope.$watch('signup.payment.amount', function(newValue, oldValue) {
     if (newValue !== oldValue && newValue !== 0 && typeof SignupService.payment.promotionCode !== 'undefined' && SignupService.payment.promotionCode.length > 0) {
         $http.get(
-          API_ENDPOINT + 'validate/promotionCode',
+          API_ENDPOINT + '/rest/v1/validate/promotionCode',
           {
             params: {
               promotionCode: SignupService.payment.promotionCode,
@@ -476,7 +441,7 @@ angular.module('signupApp')
 
       var request = $http({
         method: 'POST',
-          url: API_ENDPOINT + 'signup',
+          url: API_ENDPOINT + '/rest/v1/signup',
           data: data 
         }).then(
           function(response) {

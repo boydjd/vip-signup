@@ -5,7 +5,7 @@ angular.module('signupApp')
       function ($scope, $http, $timeout, Account, SignupService, API_ENDPOINT) {
     $scope.sendPIN = function() {
       if (typeof SignupService.activation === 'undefined' || !SignupService.activation) { 
-        $http.get(API_ENDPOINT + 'activate/sendPIN', { params: { accountNumber: Account.accountId } }); 
+        $http.get(API_ENDPOINT + '/rest/v1/activate/sendPIN', { params: { accountNumber: Account.accountId } }); 
       }
     };
   }]);

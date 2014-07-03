@@ -19,7 +19,7 @@ angular.module('signupApp')
 
           if (value !== '' && typeof value !== 'undefined') {
             $http.get(
-              API_ENDPOINT + 'validate/referral',
+              API_ENDPOINT + '/rest/v1/validate/referral',
               {
                 params: {
                   referrer: value
