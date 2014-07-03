@@ -27,13 +27,14 @@
             </div>
         </div>
         <div class="control-group" ng-class="getCssClasses(dlgForm.inputPhoneNumber)">
-            <label class="control-label" for="inputPhoneNumber">Phone Number</label>
+            <label class="control-label" for="inputPhoneNumber">Your Phone Number</label>
             <div class="controls">
                 <select id="inputBillingCountry"
                     name="inputBillingCountry"
                     class="bfh-countries"
                     data-blank="false"
                     ng-model="signup.payment.country"
+                    data-countryList="US,CA,UM,VI,PR"
                     required
                     country-picker>
                 </select>
