@@ -3,4 +3,5 @@ Building for deployment
 
 $ npm install
 $ bower install
+$ npm install -g grunt-cli
 $ grunt build
