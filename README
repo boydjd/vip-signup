@@ -1,0 +1,6 @@
+Building for deployment
+=======================
+
+$ npm install
+$ bower install
+$ grunt build
