@@ -39,7 +39,7 @@
     </head>
     <body ng-app="signupApp" ng-controller="MainCtrl">
         <!--[if lt IE 9]>
-        <script src="bower_components/es5-shim/es5-shim.js"></script>
+        <script src="bower_components/es5-shim/es5-shim.min.js"></script>
         <script src="bower_components/json3/lib/json3.min.js"></script>
         <![endif]-->
 
@@ -105,16 +105,11 @@
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-uuid4/angular-uuid4.js"></script>
         <script src="bower_components/angular-messages/angular-messages.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script src="scripts/modules/angular-payments.js"></script>
         <script src="bower_components/ng-idle/angular-idle.js"></script>
-        <script src="bower_components/BootstrapFormHelpers/js/bootstrap-formhelpers-selectbox.js"></script>
         <script src="scripts/misc/bootstrap-formhelpers-countries.en_US.js"></script>
         <script src="scripts/misc/bootstrap-formhelpers-countries.js"></script>
         <script src="scripts/misc/bootstrap-formhelpers-states.en_US.js"></script>
@@ -154,10 +149,6 @@
         <script src="scripts/directives/cardExpiration.js"></script>
         <script src="scripts/directives/phoneFormat.js"></script>
         <script src="scripts/filters/range.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/olark.js -->
-        <script src="scripts/olark.js"></script>
         <script src="scripts/directives/dlgRate.js"></script>
         <script src="scripts/controllers/initialCreation.js"></script>
         <script src="scripts/services/account.js"></script>
@@ -173,6 +164,10 @@
         <script src="scripts/directives/spinner.js"></script>
         <script src="scripts/directives/integer.js"></script>
         <script src="scripts/filters/nospace.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/olark.js -->
+        <script src="scripts/olark.js"></script>
         <!-- endbuild -->
 
         <script type="text/javascript"> 

@@ -6,7 +6,7 @@
  * @module signupApp
  */
 
-angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'uuid4', 'xeditable', 'angularPayments', 'ngIdle', 'config', 'ngMessages'])
+angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditable', 'angularPayments', 'ngIdle', 'config', 'ngMessages'])
 .config(['$idleProvider', function ($idleProvider) {
   $idleProvider.idleDuration(900);
   $idleProvider.warningDuration(300);
@@ -111,9 +111,9 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'uuid4',
   .state('gca.validate', {
     url: '/validate',
     templateUrl: 'views/validate.html',
-    controller: function(Validate) {
+    controller: ['Validate', function(Validate) {
       Validate.sendPIN();
-    }
+    }]
   })
   .state('gca.validate-retry', {
     url: '/validate-retry',
