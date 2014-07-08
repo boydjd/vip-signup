@@ -46,11 +46,11 @@ angular.module('signupApp')
   $scope.ccinfo = {type:undefined};
 
   $scope.cardTypes = [
-    {value: 'dinersclub', text: 'Diners Club'},
-    {value: 'jcb', text: 'JCB'},
-    {value: 'discover', text: 'Discover'},
-    {value: 'mastercard', text: 'MasterCard'},
-    {value: 'visa', text: 'Visa'}
+    {value: 'Diners Club', text: 'Diners Club'},
+    {value: 'JCB', text: 'JCB'},
+    {value: 'Discover', text: 'Discover'},
+    {value: 'MasterCard', text: 'MasterCard'},
+    {value: 'Visa', text: 'Visa'}
   ];
 
   $scope.dlgCountries = [

@@ -48,7 +48,7 @@ angular.module('angularPayments', []);angular.module('angularPayments')
       cvcLength: [3],
       luhn: true
     },*/ {
-      type: 'dinersclub',
+      type: 'Diners Club',
       pattern: /^(36|38|30[0-5])/,
       format: defaultFormat,
       inputFormat: defaultInputFormat,
@@ -64,7 +64,7 @@ angular.module('angularPayments', []);angular.module('angularPayments')
       cvcLength: [3],
       luhn: true
     },*/ {
-      type: 'jcb',
+      type: 'JCB',
       pattern: /^35/,
       format: defaultFormat,
       inputFormat: defaultInputFormat,
@@ -80,7 +80,7 @@ angular.module('angularPayments', []);angular.module('angularPayments')
       cvcLength: [3],
       luhn: false
     }, */{
-      type: 'discover',
+      type: 'Discover',
       pattern: /^(6011|65|64[4-9]|622)/,
       format: defaultFormat,
       inputFormat: defaultInputFormat,
@@ -88,7 +88,7 @@ angular.module('angularPayments', []);angular.module('angularPayments')
       cvcLength: [3],
       luhn: true
     }, {
-      type: 'mastercard',
+      type: 'MasterCard',
       pattern: /^5[1-5]/,
       format: defaultFormat,
       inputFormat: defaultInputFormat,
@@ -104,7 +104,7 @@ angular.module('angularPayments', []);angular.module('angularPayments')
       cvcLength: [3, 4],
       luhn: true
     }, */{
-      type: 'visa',
+      type: 'Visa',
       pattern: /^4/,
       format: defaultFormat,
       inputFormat: defaultInputFormat,
