@@ -196,7 +196,7 @@
                 <label class="control-label" for="inputCardNumber">Card Number</label>
                 <div class="controls">
                     <input type="text" id="inputCardNumber" name="inputCardNumber" class="input-medium" ng-model="signup.payment.cardNumber" payments-validate="card" payments-format="card" payments-type-model="signup.payment.card" placeholder="4444-4444-4444-4444" required>
-                    <i class="ccs" ng-class="'ccs-' + signup.payment.card" style="font-size:4em"><span></span></i>
+                    <i class="ccs" ng-class="'ccs-' + signup.payment.card|lowercase|nospace" style="font-size:4em"><span></span></i>
                     <span ng-messages="paymentForm.inputCardNumber.$error"
                         ng-messages-include="views/messages.html"
                         ng-if="paymentForm.inputCardNumber.$dirty">
