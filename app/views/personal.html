@@ -3,7 +3,8 @@
 <form name="personalForm" ng-submit="" novalidate>
     <fieldset>
         <legend ng-if="signup.offer === 'minutes'"><h1 class="panel-material-title">Try VIP for FREE</h1></legend>
-        <legend ng-if="signup.offer === 'dollars'"><h1 class="panel-material-title">Join now and get $5 FREE calling</h1></legend>
+        <legend ng-if="signup.offer === 'dollars' && signup.payment.promotionCode === 'JOINVIP5'"><h1 class="panel-material-title">Join now and get $5 FREE calling</h1></legend>
+        <legend ng-if="signup.offer === 'dollars' && signup.payment.promotionCode !== 'JOINVIP5'"><h1 class="panel-material-title">Join now and claim your offer</h1></legend>
         <div class="control-group" ng-class="getCssClasses(personalForm.inputFirstName)">
             <label class="control-label" for="inputFirstName">First Name</label>
             <div class="controls">

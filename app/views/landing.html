@@ -35,15 +35,22 @@
     </fieldset>
     <br>
     <fieldset id="selectOffer" ng-show="signup.callingMethod" class="text-center">
-        <legend class="text-center"><h2 class="panel-material-title">Select your offer</h2></legend>
-        <div class="span8 offset2">
-        <input type="submit" class="btn btn-front btn-block" value="Open a full account now and get $5 FREE" ui-sref="gca.step1" ng-click="signup.offer='dollars'"></input>
-        <br>
-        <span ng-switch on="signup.callingMethod" ng-hide="signup.callingMethod === 'hotel'">
-            <input ng-switch-when="iPhone" type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.iphone" ng-click="signup.offer='minutes'"></input>
-            <input ng-switch-when="Android" type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.android" ng-click="signup.offer='minutes'"></input>
-            <input ng-switch-default type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.step1" ng-click="signup.offer='minutes'"></input>
-        </span> 
-        </div>
+        <span ng-if="signup.payment.promotionCode === 'JOINVIP5'">
+            <legend class="text-center"><h2 class="panel-material-title">Select your offer</h2></legend>
+            <div class="span8 offset2">
+            <input type="submit" class="btn btn-front btn-block" value="Open a full account now and get $5 FREE" ui-sref="gca.step1" ng-click="signup.offer='dollars'"></input>
+            <br>
+            <span ng-switch on="signup.callingMethod" ng-hide="signup.callingMethod === 'hotel'">
+                <input ng-switch-when="iPhone" type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.iphone" ng-click="signup.offer='minutes'"></input>
+                <input ng-switch-when="Android" type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.android" ng-click="signup.offer='minutes'"></input>
+                <input ng-switch-default type="submit" class="btn btn-front btn-block" value="Get a 5 minute FREE trial call" ui-sref="gca.step1" ng-click="signup.offer='minutes'"></input>
+            </span> 
+            </div>
+        </span>
+        <span ng-if="signup.payment.promotionCode !== 'JOINVIP5'">
+            <div class="span8 offset2">
+                <input type="submit" class="btn btn-front btn-block" value="Open a full account now and claim your offer" ui-sref="gca.step1" ng-click="signup.offer='dollars'"></input>
+            </div>
+        </span>
     </fieldset>
 </form>

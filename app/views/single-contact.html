@@ -88,11 +88,19 @@
                     ui-sref="gca.payment">
                     Skip
                 </button>
-                <button type="submit"
+                <button ng-if="signup.payment.promotionCode === 'JOINVIP5'"
+                    type="submit"
                     class="btn btn-primary btn-large"
                     ng-disabled="contactForm.$invalid"
                     ui-sref="gca.payment">
                     Get $5 free
+                </button>
+                <button ng-if="signup.payment.promotionCode !== 'JOINVIP5'"
+                    type="submit"
+                    class="btn btn-primary btn-large"
+                    ng-disabled="contactForm.$invalid"
+                    ui-sref="gca.payment">
+                    Continue 
                 </button>
             </span>
         </div>
