@@ -475,6 +475,21 @@ angular.module('signupApp')
         }
       }
 
+      if (typeof SignupService.payment.successful !== 'undefined' && SignupService.payment.successful) {
+        switch (toState.name) {
+          case 'gca.congrats':
+            break;
+          case 'gca.validate':
+            break;
+          case 'gca.validate-retry':
+            break;
+          case 'sorry':
+            break;
+          default:
+            event.preventDefault();
+        }
+      }
+
       if (fromState.name === 'gca.congrats') {
         if (toState.name === 'gca.validate' && SignupService.activation) {
           event.preventDefault();
