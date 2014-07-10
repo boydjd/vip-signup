@@ -10,6 +10,15 @@ angular.module('signupApp')
     payment.cardSecurityCode = 566;
     payment.zip = undefined;
     payment.amount = undefined;
+    payment.autoRecharge = undefined;
+
+    payment.reset = function() {
+      for (var key in this) {
+        this.key = undefined;
+      }
+      payment.promotionCode = 'JOINVIP5';
+      payment.ccinfo = { type: undefined };
+    }
 
     return payment;
   }]);

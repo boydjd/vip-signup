@@ -21,5 +21,12 @@ angular.module('signupApp')
       }
     };
 
+    contact.reset = function() {
+      for (var key in this) {
+        this.key = undefined;
+      }
+    };
+
+
     return contact;
   });

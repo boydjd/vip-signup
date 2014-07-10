@@ -12,5 +12,12 @@ angular.module('signupApp')
     user.password1= undefined;
     user.password2 = undefined;
 
+    user.reset = function() {
+      for (var key in this) {
+        this.key = undefined;
+      }
+    };
+
+
     return user;
   });

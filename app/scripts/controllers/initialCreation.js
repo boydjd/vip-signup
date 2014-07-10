@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('signupApp')
-  .controller('InitialCreationCtrl', ['$scope', '$http', '$q', '$state', 'Account', 'SignupService', 'API_ENDPOINT', 'alertService', function ($scope, $http, $q, $state, Account, SignupService, API_ENDPOINT, alertService) {
+  .controller('InitialCreationCtrl', ['$scope', '$http', '$q', '$state', 'Account', 'SignupService', 'API_ENDPOINT', 'alertService', 'PaymentService',
+      function ($scope, $http, $q, $state, Account, SignupService, API_ENDPOINT, alertService, PaymentService) {
     $scope.createAccount = function() {
       var signup = SignupService;
       var callingMethod = signup.callingMethod;

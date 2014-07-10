@@ -15,8 +15,8 @@
             <li>From the dialer, dial your number (e.g. 011+Country Code+Number)
         </ul>
         <ul ng-if="(signup.callingMethod !== 'iPhone' && signup.callingMethod !== 'Android')">
-            <li ng-if="signup.contact.firstName">Dial <h3 style="display:inline"><a href="tel:+17037968501">703-796-8501</a></h3><sup>*</sup> to reach {{ signup.contact.firstName }}'s {{ signup.contact.device }}
-            <li ng-if="!signup.contact.firstName">Dial <h3 style="display:inline"><a href="tel:+17037968000">703-796-8000</a></h3><sup>*</sup>
+            <li ng-if="signup.contact.firstName && signup.contact.phoneNumber">Dial <h3 style="display:inline"><a href="tel:+17037968501">703-796-8501</a></h3><sup>*</sup> to reach {{ signup.contact.firstName }}'s {{ signup.contact.device }}
+            <li ng-if="!signup.contact.firstName && signup.contact.phoneNumber">Dial <h3 style="display:inline"><a href="tel:+17037968000">703-796-8000</a></h3><sup>*</sup>
             <li ng-if="!signup.contact.firstName">Dial your number: e.g. 011+Country Code+Number
             <li ng-if="dlg.number">Give {{ signup.contact.firstName || 'your friends' }} your Direct Line Ghana Number: <h3 style="display:inline"><a href="tel:{{ dlg.number }}">{{ dlg.number }}</a></h3> and have them call you.
             <li ng-if="!dlg.number || signup.offer !== 'minutes'">Make dialing easier, <a href="#">click here</a> to get local numbers for all of your contacts!
@@ -64,7 +64,7 @@
     <p>Got questions? Our friendly and knowledgeable representatives are standing by to help you. Call us at <a href="tel:+18008365004">1-800-836-5004</a> now, or email us at <a href="mailto:customerservice@joinvip.com">customerservice@joinvip.com</a>.</p>
 
     <div class="form-actions">
-        <button class="btn btn-primary btn-large" ui-sref="gca.payment" ng-if="signup.offer == 'minutes'">Add Credit</button>
+        <button class="btn btn-primary btn-large" ui-sref="gca.payment" ng-if="signup.offer == 'minutes' && !signup.payment.successful">Add Credit</button>
         <button class="btn btn-primary btn-large" ng-if="signup.offer != 'minutes' && signup.activation" onclick="window.location = 'https://www.lilinux.joinvip.com/myaccount/login.php'">Login</button>
     </div>
 </div>

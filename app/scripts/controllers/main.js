@@ -8,8 +8,8 @@
 
 angular.module('signupApp')
 .controller('MainCtrl', ['$rootScope', '$scope', '$window', '$filter', '$location', '$http', '$timeout', '$q', '$locale', '$anchorScroll',
-    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 
-    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService) {
+    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 'WelcomeMail', 
+    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService, WelcomeMail) {
   $scope.state = $state;
 
   $scope.whatever = function() {
@@ -372,7 +372,27 @@ angular.module('signupApp')
 
   $scope.$watch('signup.payment.amount', function(newValue, oldValue) {
     if (newValue !== oldValue) {
-      SignupService.payment.autoRecharge.amount = parseInt(newValue, 10);
+      if (typeof SignupService.payment.autoRecharge !== 'undefined') {
+        SignupService.payment.autoRecharge.amount = parseInt(newValue, 10);
+      }
+    }
+  });
+
+  $scope.$watch('signup.payment.auditId', function(newValue, oldValue) {
+    if (newValue) {
+      WelcomeMail.sendEmail();
+    }
+  });
+
+  $scope.$watch('Account.accountId', function(newValue, oldValue) {
+    if (newValue) {
+      WelcomeMail.sendEmail();
+    }
+  });
+
+  $scope.$watch('SignupService.activation', function(newValue, oldValue) {
+    if (newValue) {
+      WelcomeMail.sendEmail();
     }
   });
 
@@ -447,6 +467,7 @@ angular.module('signupApp')
           function(response) {
             if (response.data.status === "Successful") {
               SignupService.payment.successful = true;
+              SignupService.payment.auditId = response.data.resultSet.auditId;
 
               if (SignupService.callingMethod === 'hotel' || SignupService.activation) {
                 $state.go('gca.congrats');
@@ -542,6 +563,5 @@ angular.module('signupApp')
       }
     }
   });
- 
-  
+
 }]);

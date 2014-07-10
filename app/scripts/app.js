@@ -133,7 +133,10 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('sorry', {
     url: '/sorry',
-    templateUrl: 'views/timeout.html'
+    templateUrl: 'views/timeout.html',
+    controller: ['SignupService', function(SignupService) {
+      SignupService.reset();
+    }]
   })
   .state('dlg', {
     url: '/dlg?device&promo',
