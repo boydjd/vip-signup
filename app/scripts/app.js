@@ -121,7 +121,10 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('gca.congrats', {
     url: '/congrats',
-    templateUrl: 'views/congrats.html'
+    templateUrl: 'views/congrats.html',
+    controller: ['WelcomeMail', function(WelcomeMail) {
+      WelcomeMail.sendEmail();
+    }]
   })
   .state('gca.payment', {
     url: '/payment',

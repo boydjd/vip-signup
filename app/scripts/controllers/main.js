@@ -8,20 +8,9 @@
 
 angular.module('signupApp')
 .controller('MainCtrl', ['$rootScope', '$scope', '$window', '$filter', '$location', '$http', '$timeout', '$q', '$locale', '$anchorScroll',
-    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 'WelcomeMail', 
-    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService, WelcomeMail) {
+    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 
+    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService) {
   $scope.state = $state;
-
-  $scope.whatever = function() {
-    var deferred = $q.defer();
-
-    $timeout(function() {
-      deferred.resolve(['Hello', 'world!']);
-      $state.go('gca.payment');
-    }, 5000);
-
-    return deferred.promise;
-  };
 
   $scope.dt = new Date();
 
@@ -375,24 +364,6 @@ angular.module('signupApp')
       if (typeof SignupService.payment.autoRecharge !== 'undefined') {
         SignupService.payment.autoRecharge.amount = parseInt(newValue, 10);
       }
-    }
-  });
-
-  $scope.$watch('signup.payment.auditId', function(newValue, oldValue) {
-    if (newValue) {
-      WelcomeMail.sendEmail();
-    }
-  });
-
-  $scope.$watch('Account.accountId', function(newValue, oldValue) {
-    if (newValue) {
-      WelcomeMail.sendEmail();
-    }
-  });
-
-  $scope.$watch('SignupService.activation', function(newValue, oldValue) {
-    if (newValue) {
-      WelcomeMail.sendEmail();
     }
   });
 
