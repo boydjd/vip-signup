@@ -155,10 +155,9 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
         });
       }]
     },
-    controller: ['$scope', 'dlgPromise', function ($scope, dlgPromise) {
-      $scope.$parent.dlg = {};
-      $scope.$parent.dlg.ddi = dlgPromise.data.ddi;
-      $scope.$parent.dlg.number = dlgPromise.data.number;
+    controller: ['SignupService', 'dlgPromise', function (SignupService, dlgPromise) {
+      SignupService.dlg.ddi = dlgPromise.data.ddi;
+      SignupService.dlg.number = dlgPromise.data.number;
     }]
   })
 }])

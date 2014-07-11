@@ -14,6 +14,8 @@ angular.module('signupApp')
     signup.email = undefined;
     signup.callingMethod = undefined;
 
+    signup.dlg = {};
+
     signup.reset = function() {
       for (var key in this) {
         this.key = undefined;

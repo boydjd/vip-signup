@@ -24,6 +24,7 @@ angular.module('signupApp')
           activated = SignupService.activation;
 
       if ((device === 'Android' || device === 'iPhone') && (!this.confirmationSent && !this.activationSent)) {
+        // Android/iPhone
         if (offer === 'minutes') {
           this.send('Welcome Letter 1');
         } else {
@@ -33,10 +34,12 @@ angular.module('signupApp')
         this.activationSent = true;
         this.confirmationSent = true;
       } else if (device === 'hotel' && !this.confirmationSent && !this.activationSent) {
-          this.send('Welcome Letter 11');
-          this.activationSent = true;
-          this.confirmationSent = true;
+        // Hotel
+        this.send('Welcome Letter 11');
+        this.activationSent = true;
+        this.confirmationSent = true;
       } else if (typeof SignupService.dlg !== 'undefined' && SignupService.dlg.ddi) { // this is incorrect, check for an assigned number
+        //DLG
         if (activated && !this.confirmationSent) {
           this.send('Welcome Letter 12');
           this.activationSent = true;
@@ -47,7 +50,9 @@ angular.module('signupApp')
         }
       } else {
         if (offer === 'minutes') {
+          // 5MF
           if (typeof SignupService.contact !== 'undefined') {
+            // With contacts
             if (activated && !this.confirmationSent) {
               this.send('Welcome Letter 3');
               this.activationSent = true;
@@ -57,6 +62,7 @@ angular.module('signupApp')
               this.activationSent = true;
             }
           } else {
+            // Without contacts
             if (activated && !this.confirmationSent) {
               this.send('Welcome Letter 5');
               this.activationSent = true;
@@ -67,7 +73,9 @@ angular.module('signupApp')
             }
           }
         } else {
+          // 5 dollars free
           if (typeof SignupService.contact !== 'undefined') {
+            // With contacts
             if (activated && !this.confirmationSent) {
               this.send('Welcome Letter 7');
               this.activationSent = true;
@@ -77,6 +85,7 @@ angular.module('signupApp')
               this.activationSent = true;
             }
           } else {
+            // Without contacts
             if (activated && !this.confirmationSent) {
               this.send('Welcome Letter 9');
               this.activationSent = true;

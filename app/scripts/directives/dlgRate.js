@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('signupApp')
-  .directive('dlgRate', ['$http', function ($http) {
+  .directive('dlgRate', ['$http', 'SignupService', function ($http, SignupService) {
     return {
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ngModelCtrl) {
@@ -14,7 +14,7 @@ angular.module('signupApp')
               func: "signup_getPerMinuteCharge",
               type: "ghana",
               number: scope.$parent.signup.user.phoneNumber,
-              ddi: scope.dlg.ddi
+              ddi: SignupService.dlg.ddi
             }); 
 
             $http({

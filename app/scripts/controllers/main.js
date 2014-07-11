@@ -165,8 +165,7 @@ angular.module('signupApp')
   $scope.signup.payment.bonus = '0';
   $scope.signup.payment.autoRecharge = {};
   $scope.signup.payment.Total = function() { return parseFloat($scope.signup.payment.amount) + parseFloat($scope.signup.payment.bonus);};
-  $scope.signup.dlg = {};
-  $scope.signup.dlg.country = $scope.dlgCountries[0];
+  SignupService.dlg.country = $scope.dlgCountries[0];
 
   if ($location.search().device) {
     $scope.signup.callingMethod = $location.search().device;
@@ -411,8 +410,8 @@ angular.module('signupApp')
       data.promotionType = SignupService.payment.promotionType;
     }
 
-    if (typeof $scope.dlg !== 'undefined') {
-      data.ddi = $scope.dlg.ddi;
+    if (typeof SignupService.dlg !== 'undefined') {
+      data.ddi = SignupService.dlg.ddi;
     }
 
     if (typeof SignupService.payment.referral !== 'undefined') {
