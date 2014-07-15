@@ -368,7 +368,7 @@ angular.module('signupApp')
 
   $scope.submitSignup = function () {
     var data = {
-      accountNumber: Account.accountId,
+      token: Account.token,
       password: SignupService.user.password1,
       fName: SignupService.user.firstName,
       lName: SignupService.user.lastName,

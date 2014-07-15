@@ -21,7 +21,7 @@ angular.module('signupApp')
               params: {
                 pin: value,
                 callSid: scope.callSid,
-                accountNumber: Account.accountId 
+                token: Account.token
               }
             }
             )

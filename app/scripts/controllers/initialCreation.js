@@ -23,6 +23,7 @@ angular.module('signupApp')
             if (response.data.status === "Successful") {
               Account.accountId = response.data.resultSet.accountId;
               Account.guid = response.data.resultSet.guid;
+              Account.token = response.data.resultSet.token;
 
               if (callingMethod !== 'Android' && callingMethod !== 'iPhone' && callingMethod !== 'hotel') { 
                 $state.go('gca.step2');

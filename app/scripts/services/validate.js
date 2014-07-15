@@ -5,7 +5,7 @@ angular.module('signupApp')
     var validate = {};
 
     validate.sendPIN = function() {
-      $http.get(API_ENDPOINT + '/rest/v1/activate/sendPIN', { params: { accountNumber: Account.accountId } });
+      $http.get(API_ENDPOINT + '/rest/v1/activate/sendPIN', { params: { token: Account.token } });
     };
     
     return validate;

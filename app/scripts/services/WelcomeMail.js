@@ -11,7 +11,7 @@ angular.module('signupApp')
       $http.put(
         API_ENDPOINT + '/rest/v1/signupemail',
         {
-          accountNumber: Account.accountId, 
+          token: Account.token,
           auditId: SignupService.payment.auditId,
           template: template
         }
