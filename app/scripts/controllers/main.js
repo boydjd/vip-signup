@@ -8,8 +8,8 @@
 
 angular.module('signupApp')
 .controller('MainCtrl', ['$rootScope', '$scope', '$window', '$filter', '$location', '$http', '$timeout', '$q', '$locale', '$anchorScroll',
-    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 
-    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService) {
+    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 'WelcomeMail', 
+    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService, WelcomeMail) {
   $scope.state = $state;
 
   $scope.dt = new Date();
@@ -438,6 +438,11 @@ angular.module('signupApp')
             if (response.data.status === "Successful") {
               SignupService.payment.successful = true;
               SignupService.payment.auditId = response.data.resultSet.auditId;
+              WelcomeMail.confirmationSent = false;
+
+              if (SignupService.offer == 'minutes') {
+                SignupService.offer = 'notminutes';
+              }
 
               if (SignupService.callingMethod === 'hotel' || SignupService.activation) {
                 $state.go('gca.congrats');

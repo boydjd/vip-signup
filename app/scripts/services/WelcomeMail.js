@@ -23,6 +23,9 @@ angular.module('signupApp')
           device = SignupService.callingMethod,
           activated = SignupService.activation;
 
+      var hasContact = typeof SignupService.contact !== 'undefined' && SignupService.contact.firstName && SignupService.contact.country && SignupService.contact.phoneNumber;
+      var hasDlg = typeof SignupService.dlg !== 'undefined' && SignupService.dlg.ddi; 
+
       if ((device === 'Android' || device === 'iPhone') && (!this.confirmationSent && !this.activationSent)) {
         // Android/iPhone
         if (offer === 'minutes') {
@@ -38,7 +41,7 @@ angular.module('signupApp')
         this.send('Welcome Letter 11');
         this.activationSent = true;
         this.confirmationSent = true;
-      } else if (typeof SignupService.dlg !== 'undefined' && SignupService.dlg.ddi) { // this is incorrect, check for an assigned number
+      } else if (hasDlg) { 
         //DLG
         if (activated && !this.confirmationSent) {
           this.send('Welcome Letter 12');
@@ -51,7 +54,7 @@ angular.module('signupApp')
       } else {
         if (offer === 'minutes') {
           // 5MF
-          if (typeof SignupService.contact !== 'undefined') {
+          if (hasContact) {
             // With contacts
             if (activated && !this.confirmationSent) {
               this.send('Welcome Letter 3');
@@ -74,7 +77,7 @@ angular.module('signupApp')
           }
         } else {
           // 5 dollars free
-          if (typeof SignupService.contact !== 'undefined') {
+          if (hasContact) {
             // With contacts
             if (activated && !this.confirmationSent) {
               this.send('Welcome Letter 7');
