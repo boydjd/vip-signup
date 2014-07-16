@@ -178,6 +178,10 @@ angular.module('signupApp')
     $scope.signup.payment.promotionCode = $location.search().promo;
   }
 
+  if ($location.search().referrer) {
+    $scope.signup.payment.referral = $location.search().referrer;
+  }
+
   $scope.today = new Date();
 
   $scope.checkUniquePhone = function(data, formModelCtrl, ngModelCtrl) {
