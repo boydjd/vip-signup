@@ -8,8 +8,11 @@
 
 angular.module('signupApp')
 .controller('MainCtrl', ['$rootScope', '$scope', '$window', '$filter', '$location', '$http', '$timeout', '$q', '$locale', '$anchorScroll',
-    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 'WelcomeMail', 
-    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll, alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService, WelcomeMail) {
+    'alertService', '$state', '$idle', '$modal', 'API_ENDPOINT', 'Account', 'SignupService', 'WelcomeMail', 'ContactService', 
+    function ($rootScope, $scope, $window, $filter, $location, $http, $timeout, $q, $locale, $anchorScroll,
+      alertService, $state, $idle, $modal, API_ENDPOINT, Account, SignupService, WelcomeMail, ContactService) {
+
+  $scope.contactService = ContactService;
   $scope.state = $state;
 
   $scope.dt = new Date();

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('signupApp')
-  .factory('SignupService', ['$http', '$timeout', 'ContactService', 'PaymentService', 'UserService', function ($http, $timeout, ContactService, PaymentService, UserService) {
+  .factory('SignupService', ['$http', '$timeout', 'PaymentService', 'UserService', function ($http, $timeout, PaymentService, UserService) {
     var signup = {};
 
-    signup.contacts = ContactService;
+    signup.contacts = {};
     signup.payment  = PaymentService;
     signup.user = UserService;
 
@@ -25,7 +25,6 @@ angular.module('signupApp')
       PaymentService.reset();
       UserService.reset();
 
-      signup.contacts = ContactService;
       signup.payment = PaymentService;
       signup.user = UserService;
     };
