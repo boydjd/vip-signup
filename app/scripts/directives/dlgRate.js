@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('signupApp')
-  .directive('dlgRate', ['$http', 'SignupService', function ($http, SignupService) {
+  .directive('dlgRate', ['$http', 'SignupService', 'API_ENDPOINT', function ($http, SignupService, API_ENDPOINT) {
     return {
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ngModelCtrl) {
@@ -20,7 +20,7 @@ angular.module('signupApp')
             $http({
               method: 'POST',
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-              url: '//192.168.100.96/myaccount/directLine_ajax.php',
+              url: API_ENDPOINT + '/myaccount/directLine_ajax.php',
               data: rateParams
             })
             .success(function(data, status, headers, config) {
