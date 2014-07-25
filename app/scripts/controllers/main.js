@@ -443,6 +443,23 @@ angular.module('signupApp')
         }).then(
           function(response) {
             if (response.data.status === "Successful") {
+              ga('ec:addProduct', {
+                'id': 'SIGNUP',
+                'name': 'SIGNUP',
+                'price': data.amount,
+                'coupon': (typeof data.promotionCode !== 'undefined') ? data.promotionCode : '',
+                'quantity': 1
+              });
+
+              ga('ec:setAction', 'purchase', {
+                'id': Account.accountId,
+                'affiliation': 'Web Signup',
+                'revenue': data.amount,
+                'coupon': (typeof data.promotionCode !== 'undefined') ? data.promotionCode : ''
+              });
+
+              ga('send', 'event', 'button', 'click');
+
               SignupService.payment.successful = true;
               SignupService.payment.auditId = response.data.resultSet.auditId;
               WelcomeMail.confirmationSent = false;
