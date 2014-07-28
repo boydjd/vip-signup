@@ -346,9 +346,9 @@
             </div>
         </fieldset>
 
-        <div class="form-actions" ng-show="paymentForm.$valid">
+        <div class="form-actions">
             <button type="button" class="btn btn-large">Cancel</button>
-            <button type="submit" class="btn btn-primary btn-large" ui-sref="gca.review">Review</button>
+            <button type="submit" class="btn btn-primary btn-large" ui-sref="gca.review" ng-disabled="paymentForm.$invalid">Review</button>
         </div>
     </fieldset>
 </form>
