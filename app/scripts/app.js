@@ -124,6 +124,35 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
       }
     }]
   })
+  .state('gca.validate.resume', {
+    url: '/resume?guid',
+    templateUrl: 'views/validate.html',
+    resolve: {
+      guidPromise: ['$http', 'API_ENDPOINT', '$stateParams', '$state', '$rootScope', function ($http, API_ENDPOINT, $stateParams, $state, $rootScope) {
+        $rootScope.guidPromise = $http.get(API_ENDPOINT + '/rest/v1/Guid', { params: { guid: $stateParams.guid } }).error(function() { $state.go('error'); }); 
+
+        return $rootScope.guidPromise;
+      }]
+    },
+    controller: ['guidPromise', 'Account', 'SignupService', function (guidPromise, Account, SignupService) {
+      var signup = SignupService;
+      var account = Account;
+
+      signup.user.firstName = guidPromise.data.resultSet.fname;
+      signup.user.lastName = guidPromise.data.resultSet.lname;
+      signup.user.email = guidPromise.data.resultSet.email;
+      signup.user.phoneNumber = guidPromise.data.resultSet.phoneNumber;
+      signup.payment.streetAddress = guidPromise.data.resultSet.address.street;
+      signup.payment.city = guidPromise.data.resultSet.address.city;
+      signup.payment.state = guidPromise.data.resultSet.address.state;
+      signup.payment.zip = guidPromise.data.resultSet.address.zipCode;
+      signup.payment.country = guidPromise.data.resultSet.address.country;
+
+      account.accountId = guidPromise.data.resultSet.accountId;
+      account.guid = guidPromise.data.resultSet.guid;
+      account.token = guidPromise.data.resultSet.token;
+    }]
+  })
   .state('gca.validate-retry', {
     url: '/validate-retry',
     templateUrl: 'views/validate-retry.html'
