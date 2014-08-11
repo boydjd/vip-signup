@@ -553,10 +553,9 @@ angular.module('signupApp')
   };
 
   // This prevents loading of different states
-  // Need to change this to check for GUID in the URL and load the appropriate state, or check for cookies once we save data in the cookies
   $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     if (fromState.name === '' && toState.name !== "gca.start") {
-      if (toState.name !== "dlg") {
+      if (toState.name !== "dlg" && toState.name !== "gca.payment.resume" && toState.name !== "gca.validate.resume" && toState.name !== "error") {
         event.preventDefault();
         $state.go('gca.start');
       }

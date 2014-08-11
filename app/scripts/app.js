@@ -110,9 +110,18 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('gca.validate', {
     url: '/validate',
+    template: '<div>\
+    <div ui-view></div>\
+    </div>',
     templateUrl: 'views/validate.html',
-    controller: ['Validate', function(Validate) {
-      Validate.sendPIN();
+    controller: ['Validate', '$rootScope', function(Validate, $rootScope) {
+      if (typeof $rootScope.guidPromise !== 'undefined') {
+        $rootScope.guidPromise.then(function() {
+          Validate.sendPIN();
+        });
+      } else {
+        Validate.sendPIN();
+      }
     }]
   })
   .state('gca.validate-retry', {
@@ -128,7 +137,37 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('gca.payment', {
     url: '/payment',
+    template: '<div>\
+    <div ui-view></div>\
+    </div>',
     templateUrl: 'views/payment.html'
+  })
+  .state('gca.payment.resume', {
+    url: '/resume?guid',
+    templateUrl: 'views/payment.html',
+    resolve: {
+      guidPromise: ['$http', 'API_ENDPOINT', '$stateParams', '$state', function ($http, API_ENDPOINT, $stateParams, $state) {
+        return $http.get(API_ENDPOINT + '/rest/v1/Guid', { params: { guid: $stateParams.guid } }).error(function() { $state.go('error'); }); 
+      }]
+    },
+    controller: ['guidPromise', 'Account', 'SignupService', function (guidPromise, Account, SignupService) {
+      var signup = SignupService;
+      var account = Account;
+
+      signup.user.firstName = guidPromise.data.resultSet.fname;
+      signup.user.lastName = guidPromise.data.resultSet.lname;
+      signup.user.email = guidPromise.data.resultSet.email;
+      signup.user.phoneNumber = guidPromise.data.resultSet.phoneNumber;
+      signup.payment.streetAddress = guidPromise.data.resultSet.address.street;
+      signup.payment.city = guidPromise.data.resultSet.address.city;
+      signup.payment.state = guidPromise.data.resultSet.address.state;
+      signup.payment.zip = guidPromise.data.resultSet.address.zipCode;
+      signup.payment.country = guidPromise.data.resultSet.address.country;
+
+      account.accountId = guidPromise.data.resultSet.accountId;
+      account.guid = guidPromise.data.resultSet.guid;
+      account.token = guidPromise.data.resultSet.token;
+    }]
   })
   .state('gca.review', {
     url: '/review',
@@ -137,6 +176,13 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   .state('sorry', {
     url: '/sorry',
     templateUrl: 'views/timeout.html',
+    controller: ['SignupService', function(SignupService) {
+      SignupService.reset();
+    }]
+  })
+  .state('error', {
+    url: '/error',
+    templateUrl: 'views/error.html',
     controller: ['SignupService', function(SignupService) {
       SignupService.reset();
     }]
