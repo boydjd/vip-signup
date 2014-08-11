@@ -338,6 +338,8 @@ angular.module('signupApp')
               SignupService.payment.amount = parseInt(data.resultSet.min_threshold, 10);
               SignupService.payment.bonus = parseInt(data.resultSet.bonus, 10);
               SignupService.payment.promomtionType = data.resultSet.type;
+            } else {
+              SignupService.payment.bonus = parseInt(data.resultSet.bonus, 10);
             }
           } else {
             SignupService.payment.bonus = parseInt(0, 10);
