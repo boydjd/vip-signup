@@ -53,7 +53,7 @@
         <h2>Thank you for your payment</h2>
         <ul>
             <li>Your Opening Balance: {{signup.payment.amount | currency}}
-            <li>Bonus Amount: {{signup.payment.bonus || 0 | currency}}
+            <li ng-if="signup.payment.bonus > 0">Bonus Amount: {{signup.payment.bonus || 0 | currency}}
             <li>Payment Method: {{signup.payment.card || signup.payment.method | capitalize}}
             <li ng-if="signup.payment.method === 'creditCard'">Card Number: {{ signup.payment.cardNumber | maskCreditCard }}
         </ul>
