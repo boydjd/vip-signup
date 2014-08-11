@@ -110,9 +110,6 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('gca.validate', {
     url: '/validate',
-    template: '<div>\
-    <div ui-view></div>\
-    </div>',
     templateUrl: 'views/validate.html',
     controller: ['Validate', '$rootScope', function(Validate, $rootScope) {
       if (typeof $rootScope.guidPromise !== 'undefined') {
@@ -126,7 +123,6 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('gca.validate.resume', {
     url: '/resume?guid',
-    templateUrl: 'views/validate.html',
     resolve: {
       guidPromise: ['$http', 'API_ENDPOINT', '$stateParams', '$state', '$rootScope', function ($http, API_ENDPOINT, $stateParams, $state, $rootScope) {
         $rootScope.guidPromise = $http.get(API_ENDPOINT + '/rest/v1/Guid', { params: { guid: $stateParams.guid } }).error(function() { $state.go('error'); }); 
@@ -166,14 +162,10 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
   })
   .state('gca.payment', {
     url: '/payment',
-    template: '<div>\
-    <div ui-view></div>\
-    </div>',
     templateUrl: 'views/payment.html'
   })
   .state('gca.payment.resume', {
     url: '/resume?guid',
-    templateUrl: 'views/payment.html',
     resolve: {
       guidPromise: ['$http', 'API_ENDPOINT', '$stateParams', '$state', function ($http, API_ENDPOINT, $stateParams, $state) {
         return $http.get(API_ENDPOINT + '/rest/v1/Guid', { params: { guid: $stateParams.guid } }).error(function() { $state.go('error'); }); 
