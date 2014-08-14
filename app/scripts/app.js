@@ -244,10 +244,10 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
     $idle.watch();
   }
 }])
-.run(['$location', '$rootScope', '$window', function($location, $rootScope, $window) {
+.run(['$location', '$rootScope', '$window', function($rootScope, $window) {
   // Send pageview data to GA
   $rootScope.$on('$stateChangeSuccess', function(event, toState, fromState, fromParams) {
-    $window.ga('send', 'pageview', { page: $location.path()});
+    $window.ga('send', 'pageview', { page: $window.location.pathname + $window.location.hash });
   });
 }])
 .run(['$rootScope', '$window', function($rootScope, $window) {
@@ -255,7 +255,7 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
     $window.scrollTo(0,0);
   });
 }])
-.run(['$timeout', '$location', function($timeout, $location) {
+.run(['$timeout', '$location', function($timeout, $window) {
   // Collect user timing information and fire off to GA
   $timeout(function() {
     window.performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
@@ -269,7 +269,7 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
         'timingCategory': 'signupApp',
         'timingVar': 'Load Page',
         'timingValue': parseTime,
-        'page': $location.path()
+        'page': $window.location.pathname + $window.location.hash
       });
     }
   }, 0, false);
