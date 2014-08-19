@@ -490,7 +490,7 @@ angular.module('signupApp')
   $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     if (toState.name !== 'gca.sorry') {
       if (toState.name !== 'gca.congrats' && SignupService.activation) {
-        if (fromState.name !== 'gca.payment' && fromState.name !== 'gca.review') {
+        if (fromState.name !== 'gca.payment' && fromState.name !== 'gca.payment.resume' && fromState.name !== 'gca.review') {
           if (fromState.name !== 'gca.congrats' && toState.name !== 'gca.payment') {
             event.preventDefault();
           }

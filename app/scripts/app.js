@@ -185,6 +185,8 @@ angular.module('signupApp', ['vipFilters', 'ui.bootstrap', 'ui.router', 'xeditab
       signup.payment.zip = guidPromise.data.resultSet.address.zipCode;
       signup.payment.country = guidPromise.data.resultSet.address.country;
 
+      signup.activation = guidPromise.data.resultSet.activated;
+
       account.accountId = guidPromise.data.resultSet.accountId;
       account.guid = guidPromise.data.resultSet.guid;
       account.token = guidPromise.data.resultSet.token;
